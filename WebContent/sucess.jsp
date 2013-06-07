@@ -46,6 +46,10 @@
 					<td><INPUT TYPE=number NAME=barrels></td>
 				</tr>
 				<tr>
+				<tr>
+					<td>Date</td>
+					<td><INPUT TYPE=text NAME=date></td>
+				</tr>
 					<td><P>
 							<INPUT class="btn btn-primary" TYPE=SUBMIT VALUE='Send telegram'>
 						</P></td>
