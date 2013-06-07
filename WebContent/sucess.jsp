@@ -18,6 +18,7 @@
 		<%
 		String user = (String) session.getAttribute("user");
 		out.println(user);
+		
 		%>
 		!
 		<br> What have you sold?
@@ -27,6 +28,9 @@
 				<tr>
 					<td>Town</td>
 					<td><select name="town">
+					
+							<!-- populate list exampe: http://stackoverflow.com/questions/3267837/how-to-populate-a-drop-down-list-from-the-database-with-jstl -->
+					
 							<option value="1">Phoenix</option>
 							<option value="2">Tucson</option>
 							<option value="3">Mesa</option>
@@ -49,6 +53,7 @@
 				<tr>
 					<td>Date</td>
 					<td><INPUT TYPE=text NAME=date></td>
+					<!-- add date picker from http://www.eyecon.ro/bootstrap-datepicker/ ? -->
 				</tr>
 					<td><P>
 							<INPUT class="btn btn-primary" TYPE=SUBMIT VALUE='Send telegram'>
