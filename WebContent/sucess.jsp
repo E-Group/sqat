@@ -28,9 +28,9 @@
 				<tr>
 					<td>Town</td>
 					<td><select name="town">
-					
+							
 							<!-- populate list exampe: http://stackoverflow.com/questions/3267837/how-to-populate-a-drop-down-list-from-the-database-with-jstl -->
-					
+							
 							<option value="1">Phoenix</option>
 							<option value="2">Tucson</option>
 							<option value="3">Mesa</option>
