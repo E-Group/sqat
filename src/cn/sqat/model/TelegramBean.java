@@ -3,15 +3,7 @@ package cn.sqat.model;
 public class TelegramBean {
 
 	private int town,locks,stocks,barrels,id;
-	String date;
-
-	public String getDate() {
-		return date;
-	}
-
-	public void setDate(String date) {
-		this.date = date;
-	}
+	private String date;
 
 	public int getTown() {
 		return town;
@@ -51,5 +43,13 @@ public class TelegramBean {
 
 	public void setBarrels(String barrels) {
 		this.barrels = Integer.parseInt(barrels);;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
 	}
 }

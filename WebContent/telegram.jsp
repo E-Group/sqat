@@ -11,12 +11,13 @@
 
 <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet" type="text/css">
 
 <title>Insert title here</title>
 </head>
 <body>
 
-You entered<BR>
+Your telegram has been recorded. You entered<BR>
 Town: <%= sale.getTown() %><BR>
 Locks: <%= sale.getLocks() %><BR>
 Stocks: <%= sale.getStocks() %><BR>

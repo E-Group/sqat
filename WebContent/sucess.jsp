@@ -4,33 +4,38 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
-
+<title>Commission</title>
 
 <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link href="css/bootstrap-responsive.css" rel="stylesheet">
-
+<link href="css/style.css" rel="stylesheet" type="text/css">
 
 </head>
 <body>
-	<div class="container">
-		Welcome
-		<%
-		String user = (String) session.getAttribute("user");
-		out.println(user);
-		
-		%>
-		!
-		<br> What have you sold?
 
+	<div class="container">
 		<form class="form" ACTION="TelegramServlet">
+			<h2 class="form-heading">What have you sold?</h2>
 			<table>
 				<tr>
+					<td>User</td>
+					<td>
+						<%
+							String user = (String) session.getAttribute("user");
+
+							/* Fixar stor första bokstav av någon anledning...*/
+							String first = user.substring(0, 1);
+							first = first.toUpperCase();
+							String last = user.substring(1);
+							user = first + last;
+							out.println(user);
+						%>
+					</td>
+				</tr>
+				<tr>
 					<td>Town</td>
-					<td><select name="town">
-							
+					<td><select name="town">							
 							<!-- populate list exampe: http://stackoverflow.com/questions/3267837/how-to-populate-a-drop-down-list-from-the-database-with-jstl -->
-							
 							<option value="1">Phoenix</option>
 							<option value="2">Tucson</option>
 							<option value="3">Mesa</option>
@@ -52,15 +57,34 @@
 				<tr>
 				<tr>
 					<td>Date</td>
-					<td><INPUT TYPE=text NAME=date></td>
-					<!-- add date picker from http://www.eyecon.ro/bootstrap-datepicker/ ? -->
+					<td>
+						<div class="input-append date" id="dp3" data-date="2013-01-01"
+							data-date-format="yyyy-mm-dd">
+							<input name="saledate" class="span2" size="16" type="text"
+								value="2013-01-01" readonly> <span class="add-on"><i
+								class="icon-calendar"></i></span>
+						</div>
+
+					</td>
 				</tr>
-					<td><P>
-							<INPUT class="btn btn-primary" TYPE=SUBMIT VALUE='Send telegram'>
-						</P></td>
+				<tr>
+					<td><INPUT class="btn btn-primary" TYPE=SUBMIT
+						VALUE='Send telegram'></td>
 				</tr>
 			</table>
-		</FORM>
+		</form>
+		
+		<form class="form" action="">
+		<input class="btn btn-info" type=submit value="View Sells">
+		</form>
+		
 	</div>
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script src="js/bootstrap-datepicker.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('#dp3').datepicker();
+		});
+	</script>
 </body>
 </html>

@@ -28,11 +28,13 @@ public class TelegramServlet extends HttpServlet {
 			tele.setLocks(request.getParameter("locks"));
 			tele.setStocks(request.getParameter("stocks"));
 			tele.setBarrels(request.getParameter("barrels"));
-			tele.setDate(request.getParameter("date"));
-			
+			tele.setDate(request.getParameter("saledate"));
+			System.out.println("Date: "+tele.getDate());
+	
 			tele = TelegramDao.submit(tele);
 			
 			response.sendRedirect("telegram.jsp");
+			
 		} catch (Throwable exc)
 		{
 			System.out.println(exc);

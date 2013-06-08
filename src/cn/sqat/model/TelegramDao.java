@@ -20,6 +20,7 @@ public class TelegramDao {
 		int stocks = bean.getStocks();
 		int barrels = bean.getBarrels();
 		String date = bean.getDate();
+
 		String insertQuery = "insert into sale (salesperson, town, item, date, quantity) values "+
 						"("+id+","+town+",1,'"+date+"',"+locks+"),"+
 						"("+id+","+town+",2,'"+date+"',"+stocks+"),"+

@@ -36,3 +36,14 @@
 Icon?
 ehthumbs.db
 Thumbs.db
+.classpath
+
+.project
+
+.settings/org.eclipse.jdt.core.prefs
+
+.settings/org.eclipse.wst.common.component
+
+.settings/org.eclipse.wst.common.project.facet.core.xml
+
+bin/
