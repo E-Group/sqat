@@ -6,24 +6,69 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 
+<style type="text/css">
+.container {
+	padding: 50px;
+}
 
+.form {
+	max-width: 350px;
+	padding: 19px 29px 29px;
+	margin: 0 auto 20px;
+	background-color: #fff;
+	border: 1px solid #e5e5e5;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+	-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+	box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+}
+</style>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link href="css/bootstrap-responsive.css" rel="stylesheet">
-
-
+<link href="css/datepicker.less" rel="stylesheet" type="text/css" />
+<link href="css/datepicker.css" rel="stylesheet">
+<script type="text/javascript" src="js/bootstrap-datepicker.js">
+$(function() {
+	  $('#datepicker').datepicker();
+	});
+</script>
 </head>
 <body>
-	<div class="container">
-		Welcome
-		<%
-		String user = (String) session.getAttribute("user");
-		out.println(user);
-		%>
-		!
-		<br> What have you sold?
 
+	<div class="container">
+	
 		<form class="form" ACTION="TelegramServlet">
+			<h2 class="form-heading">What have you sold?</h2>
 			<table>
+				<tr>
+					<td>User</td>
+					<td>
+						<%
+							String user = (String) session.getAttribute("user");
+
+							/* Fixar stor första bokstav av någon anledning...*/
+							String first = user.substring(0, 1);
+							first = first.toUpperCase();
+							String last = user.substring(1);
+							user = first + last;
+							out.println(user);
+						%>
+					</td>
+				</tr>
+				<tr>
+					<td>Date</td>
+					<td>
+
+						<div class="input-append date" id="datepicker" data-date="2013-01-01"
+							data-date-format="yyyy-mm-dd" data-datepicker="datepicker">
+							<input name="saledate" class="span2" size="16" type="text"
+								value="2013-01-01"> <span class="add-on"><i
+								class="icon-th"></i></span>
+					</td>
+				</tr>
 				<tr>
 					<td>Town</td>
 					<td><select name="town">

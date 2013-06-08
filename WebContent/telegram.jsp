@@ -16,7 +16,7 @@
 </head>
 <body>
 
-You entered<BR>
+Your telegram has been recorded. You entered<BR>
 Town: <%= sale.getTown() %><BR>
 Locks: <%= sale.getLocks() %><BR>
 Stocks: <%= sale.getStocks() %><BR>

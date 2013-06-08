@@ -19,10 +19,12 @@ public class TelegramDao {
 		int stocks = bean.getStocks();
 		int barrels = bean.getBarrels();
 		int id = bean.getId();
+		String date = bean.getDate();
+		
 		String insertQuery = "insert into sale (salesperson, town, item, date, quantity) values "+
-						"("+id+","+town+",1,'2000-01-01',"+locks+"),"+
-						"("+id+","+town+",2,'2000-01-01',"+stocks+"),"+
-						"("+id+","+town+",3,'2000-01-01',"+barrels+");";
+						"("+id+","+town+",1,'"+date+"',"+locks+"),"+
+						"("+id+","+town+",2,'"+date+"',"+stocks+"),"+
+						"("+id+","+town+",3,'"+date+"',"+barrels+");";
 		
 		
 //		String searchQuery = "select * from user u where u.name = '"+username+"' AND u.password = '"+password+"'";
