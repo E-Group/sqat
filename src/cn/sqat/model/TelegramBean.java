@@ -4,15 +4,6 @@ public class TelegramBean {
 
 	private int town,locks,stocks,barrels,id;
 	private String date;
-	String date;
-
-	public String getDate() {
-		return date;
-	}
-
-	public void setDate(String date) {
-		this.date = date;
-	}
 
 	public int getTown() {
 		return town;

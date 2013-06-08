@@ -25,21 +25,12 @@
 	box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
 }
 </style>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link href="css/bootstrap-responsive.css" rel="stylesheet">
-<link href="css/datepicker.less" rel="stylesheet" type="text/css" />
-<link href="css/datepicker.css" rel="stylesheet">
-<script type="text/javascript" src="js/bootstrap-datepicker.js">
-$(function() {
-	  $('#datepicker').datepicker();
-	});
-</script>
 </head>
 <body>
 
 	<div class="container">
-	
 		<form class="form" ACTION="TelegramServlet">
 			<h2 class="form-heading">What have you sold?</h2>
 			<table>
@@ -59,22 +50,11 @@ $(function() {
 					</td>
 				</tr>
 				<tr>
-					<td>Date</td>
-					<td>
-
-						<div class="input-append date" id="datepicker" data-date="2013-01-01"
-							data-date-format="yyyy-mm-dd" data-datepicker="datepicker">
-							<input name="saledate" class="span2" size="16" type="text"
-								value="2013-01-01"> <span class="add-on"><i
-								class="icon-th"></i></span>
-					</td>
-				</tr>
-				<tr>
 					<td>Town</td>
 					<td><select name="town">
-					
+
 							<!-- populate list exampe: http://stackoverflow.com/questions/3267837/how-to-populate-a-drop-down-list-from-the-database-with-jstl -->
-					
+
 							<option value="1">Phoenix</option>
 							<option value="2">Tucson</option>
 							<option value="3">Mesa</option>
@@ -96,15 +76,29 @@ $(function() {
 				<tr>
 				<tr>
 					<td>Date</td>
-					<td><INPUT TYPE=text NAME=date></td>
-					<!-- add date picker from http://www.eyecon.ro/bootstrap-datepicker/ ? -->
+					<td>
+						<div class="input-append date" id="dp3" data-date="2013-01-01"
+							data-date-format="yyyy-mm-dd">
+							<input name="saledate" class="span2" size="16" type="text"
+								value="2013-01-01" readonly> <span class="add-on"><i
+								class="icon-calendar"></i></span>
+						</div>
+
+					</td>
 				</tr>
-					<td><P>
-							<INPUT class="btn btn-primary" TYPE=SUBMIT VALUE='Send telegram'>
-						</P></td>
+				<tr>
+					<td><INPUT class="btn btn-primary" TYPE=SUBMIT
+						VALUE='Send telegram'></td>
 				</tr>
 			</table>
 		</FORM>
 	</div>
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script src="js/bootstrap-datepicker.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('#dp3').datepicker();
+		});
+	</script>
 </body>
 </html>
