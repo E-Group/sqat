@@ -14,13 +14,14 @@ public class TelegramDao {
 	{
 		
 		Statement stmt = null;
+		int id = bean.getId();
 		int town = bean.getTown();
 		int locks = bean.getLocks();
 		int stocks = bean.getStocks();
 		int barrels = bean.getBarrels();
 		int id = bean.getId();
 		String date = bean.getDate();
-		
+
 		String insertQuery = "insert into sale (salesperson, town, item, date, quantity) values "+
 						"("+id+","+town+",1,'"+date+"',"+locks+"),"+
 						"("+id+","+town+",2,'"+date+"',"+stocks+"),"+

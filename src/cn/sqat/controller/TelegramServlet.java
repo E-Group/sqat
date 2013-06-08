@@ -23,16 +23,16 @@ public class TelegramServlet extends HttpServlet {
 			System.out.println("In the Telegram Servlet");
 			HttpSession userSession = request.getSession();
 			TelegramBean tele = new TelegramBean();
+			tele.setId((String)userSession.getAttribute("id"));
 			tele.setTown(request.getParameter("town"));
 			tele.setLocks(request.getParameter("locks"));
 			tele.setStocks(request.getParameter("stocks"));
 			tele.setBarrels(request.getParameter("barrels"));
-			tele.setId((String)userSession.getAttribute("id"));
 			tele.setDate(request.getParameter("saledate"));
 			System.out.println("Date: "+tele.getDate());
-		
-			tele = TelegramDao.submit(tele);
 	
+			tele = TelegramDao.submit(tele);
+			
 			response.sendRedirect("telegram.jsp");
 			
 		} catch (Throwable exc)
