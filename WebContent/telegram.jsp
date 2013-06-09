@@ -2,11 +2,17 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<jsp:useBean id="sale" class="cn.sqat.model.TelegramBean" scope="session"/>
-<jsp:setProperty name="sale" property="*"/>
 
 <html>
 <head>
+
+<script>
+	if ('${loginbean.isValid()}') {
+	} else {
+		window.location = "/Commission/index.jsp";
+	}
+</script>
+
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
 <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -18,10 +24,10 @@
 <body>
 
 Your telegram has been recorded. You entered<BR>
-Town: <%= sale.getTown() %><BR>
-Locks: <%= sale.getLocks() %><BR>
-Stocks: <%= sale.getStocks() %><BR>
-Barrels: <%= sale.getBarrels() %><BR>
+Town: ${telegrambean.town}<BR>
+Locks: ${telegrambean.locks}<BR>
+Stocks: ${telegrambean.stocks}<BR>
+Barrels:  ${telegrambean.barrels}<BR>
 
 <a href="sucess.jsp"><button class="btn btn-success">Continue</button></a>
 
