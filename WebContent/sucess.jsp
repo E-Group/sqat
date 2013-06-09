@@ -74,8 +74,8 @@
 			</table>
 		</form>
 		
-		<form class="form" action="">
-		<input class="btn btn-info" type=submit value="View Sells">
+		<form class="form" action="sales.jsp">
+		<input class="btn btn-info" type=submit value="Sales">
 		</form>
 		
 	</div>
