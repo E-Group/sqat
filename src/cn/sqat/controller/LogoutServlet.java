@@ -8,10 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import cn.sqat.model.TelegramBean;
-import cn.sqat.model.TelegramDao;
-
-public class TelegramServlet extends HttpServlet {
+public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -20,20 +17,10 @@ public class TelegramServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try
 		{
-			System.out.println("In the Telegram Servlet");
+			System.out.println("In the Logout Servlet");
 			HttpSession userSession = request.getSession();
-			TelegramBean tele = new TelegramBean();
-			tele.setId((String)userSession.getAttribute("id"));
-			tele.setTown(request.getParameter("town"));
-			tele.setLocks(request.getParameter("locks"));
-			tele.setStocks(request.getParameter("stocks"));
-			tele.setBarrels(request.getParameter("barrels"));
-			tele.setDate(request.getParameter("saledate"));
-			System.out.println("Date: "+tele.getDate());
-	
-			tele = TelegramDao.submit(tele);
-		    userSession.setAttribute("telegrambean", tele);
-			response.sendRedirect("telegram.jsp");
+			userSession.invalidate();
+			response.sendRedirect("index.jsp");
 			
 		} catch (Throwable exc)
 		{
