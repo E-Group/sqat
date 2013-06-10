@@ -127,5 +127,33 @@ public class QueryDao {
 		}
 		return dataList;
 	}
+	
+	public static List<ReportBean> queryReports(Object id)
+	{
+		List<ReportBean> dataList = new ArrayList<ReportBean>(); 
+		Statement stmt = null;
+		try
+		{
+			currentCon = ConnectionManager.getConnection();
+			stmt=currentCon.createStatement();
+			rs = stmt.executeQuery("SELECT * FROM report,salesperson,user WHERE " +
+					"salesperson='"+id+"' AND " +
+					"salesperson.id=report.salesperson AND salesperson.id=user.id ORDER BY month DESC;");
+			while (rs.next()){
+				//Add records into data list
+				ReportBean rb = new ReportBean();
+				rb.setSalesperson(rs.getString("user.name"));
+				rb.setMonth(rs.getString("month"));
+				rb.setSalary(rs.getInt("salary"));
+				dataList.add(rb);
+			}
+
+		}
+		catch (Exception ex)
+		{
+			System.out.println("Query failed: An Exception has occurred! " + ex);
+		}
+		return dataList;
+	}
 }
 
