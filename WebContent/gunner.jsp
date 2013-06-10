@@ -20,20 +20,21 @@
 <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link href="css/bootstrap-responsive.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet" type="text/css">
-
+<
+<style type="text/css">
 </style>
 </head>
 <body>
 	<div class="container">
-		<div class="form">
+		<div class="form form-table">
 			<h2 class="form-heading">Gunner view</h2>
-			<form action="SalesServlet">
+			<div style="max-width: 400px;">
+				<form action="SalesServlet">
 					<div class="input-append date" id="datepicker" data-date="2013-06">
 						<input name="date" class="span1" size="16" type="text"
 							value="${selecteddate}" readonly> <span class="add-on"><i
 							class="icon-calendar"></i></span>
 					</div>
-
 					<select class="sale-dropdown" name="salespersons">
 						<c:forEach items="${salespersonlist}" var="element">
 							<option value="${element.id}"
@@ -41,8 +42,8 @@
 						</c:forEach>
 					</select>
 					<button class="btn btn-info" type="submit"">View sales</button>
-			</form>
-
+				</form>
+			</div>
 			<table class="table table-striped table-bordered">
 				<h4>Sales for period ${selecteddate}</h4>
 				<thead>
