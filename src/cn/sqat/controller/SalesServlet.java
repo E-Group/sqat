@@ -3,7 +3,6 @@ package cn.sqat.controller;
 import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,11 +24,12 @@ public class SalesServlet extends HttpServlet {
 			System.out.println("In the Sales Servlet");
 //			HttpSession session = request.getSession();
 
-			List<SaleBean> list = QueryDao.query("SELECT * FROM sales;");  
+			List<SaleBean> list = QueryDao.query("SELECT * FROM sale;");  
 			request.setAttribute("list", list);
-
-			RequestDispatcher rd = getServletContext().getRequestDispatcher("sales.jsp");
-			rd.forward(request, response);
+			for(SaleBean a:list){
+				System.out.println(a.getId());
+			}
+			request.getRequestDispatcher("/sales.jsp").forward(request, response);
 			
 		} catch (Throwable exc)
 		{

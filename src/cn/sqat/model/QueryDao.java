@@ -25,12 +25,13 @@ public class QueryDao {
 			stmt=currentCon.createStatement();
 			rs = stmt.executeQuery(query);
 			
-			while (rs.next ()){
+			while (rs.next()){
 				//Add records into data list
 				SaleBean sb = new SaleBean();
 				sb.setId(rs.getInt("id"));
 				sb.setSalesperson(rs.getInt("salesperson"));
 				sb.setTown(rs.getInt("town"));
+				sb.setItem(rs.getInt("item"));
 				sb.setDate(rs.getString("date"));
 				sb.setQuantity(rs.getInt("quantity"));
 				dataList.add(sb);

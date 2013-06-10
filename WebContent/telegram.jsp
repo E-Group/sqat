@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<jsp:include page="nav.jsp"/>
+<jsp:include page="nav.jsp" />
 
 <html>
 <head>
@@ -22,14 +22,21 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<div class="container">
+		<div class="form">
+		<h2 class="form-heading">Your telegram has been recorded</h2>
+			<div class="well-large">
+				You entered<BR> Town:
+				${telegrambean.town}<BR> Locks: ${telegrambean.locks}<BR>
+				Stocks: ${telegrambean.stocks}<BR> Barrels:
+				${telegrambean.barrels}<BR> 
+				<a href="sucess.jsp"><button class="btn btn-success">Add new sale</button></a>
+				<a href="<%=request.getContextPath()%>/SalesServlet"><button class="btn btn-info">View sales</button></a>
+			</div>
+		</div>
+	</div>
 
-Your telegram has been recorded. You entered<BR>
-Town: ${telegrambean.town}<BR>
-Locks: ${telegrambean.locks}<BR>
-Stocks: ${telegrambean.stocks}<BR>
-Barrels:  ${telegrambean.barrels}<BR>
+	<jsp:include page="footer.jsp" />
 
-<a href="sucess.jsp"><button class="btn btn-success">Continue</button></a>
-<jsp:include page="footer.jsp"/>
 </body>
 </html>

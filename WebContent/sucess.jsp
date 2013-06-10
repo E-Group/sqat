@@ -3,19 +3,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<jsp:include page="nav.jsp"/>
-<style>
-body {
-	padding-top: 60px;
-	/* 60px to make the container go all the way to the bottom of the topbar */
-}
-</style>
 <script>
 	if ('${loginbean.isValid()}') {
 	} else {
 		window.location = "/Commission/index.jsp";
 	}
 </script>
+<jsp:include page="nav.jsp"/>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Commission</title>
 <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -26,7 +20,7 @@ body {
 	<!--  CONTAINTER -->
 	<div class="container">
 		<form class="form" ACTION="TelegramServlet">
-			<h2 class="form-heading">What have you sold?</h2>
+			<h2 class="form-heading">Add sale</h2>
 			<table>
 				<tr>
 					<td>User</td>
@@ -85,8 +79,6 @@ body {
 			<p class="error-msg">${message}</p>
 			<c:remove var="message" scope="session" />
 		</form>
-		
-			<input class="btn btn-info" type="submit" value="View sales" onclick="sales.jsp">
 	</div>
 
 	<!-- JS -->
@@ -97,6 +89,8 @@ body {
 			$('#dp3').datepicker();
 		});
 	</script>
+	
 	<jsp:include page="footer.jsp"/>
+	
 </body>
 </html>
