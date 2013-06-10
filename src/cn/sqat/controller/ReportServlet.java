@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import cn.sqat.model.QueryDao;
 import cn.sqat.model.SaleBean;
 
-public class SalesServlet extends HttpServlet {
+public class ReportServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -22,11 +22,11 @@ public class SalesServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try
 		{
-//			System.out.println("In the Sales Servlet");
+//			System.out.println("In the Salary Servlet");
 			HttpSession session = request.getSession();
 			request.getAttribute("user");
 			// TODO: borde flytta query till querydao
-			List<SaleBean> list = QueryDao.querySales("SELECT * FROM sale,town,item WHERE " +
+			List<SaleBean> list = QueryDao.queryReports("SELECT * FROM report,salesperson,user WHERE " +
 					"salesperson='"+session.getAttribute("id")+"' AND " +
 							"town.id=sale.town AND item.id=sale.item ORDER BY date DESC;");			
 			request.setAttribute("list", list);
