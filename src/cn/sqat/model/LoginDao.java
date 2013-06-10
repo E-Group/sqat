@@ -37,14 +37,26 @@ public class LoginDao{
 				bean.setId(id);
 				
 				stmt = currentCon.createStatement();
-				rs = stmt.executeQuery("select * from gunsmith where id ="+bean.getId()+";");
-				if (!rs.next() ) {
-				    System.out.println("Salesperson");
-				    /* Salesperson */
-				    bean.setGunner(false);
-				}
-				else
+				rs = stmt.executeQuery("select * from user,salesperson,gunsmith where salesperson.id="+bean.getId()+" and gunsmith.id=user.id");
+				if(rs.next()){
+					bean.setGunner(false);
+					bean.setGunsmith(rs.getString("user.name"));
+				}else{
 					bean.setGunner(true);
+					bean.setGunsmith("NAN");
+				}
+					
+				
+//				stmt = currentCon.createStatement();
+//				rs = stmt.executeQuery("select * from gunsmith where id ="+bean.getId()+";");
+//				if (!rs.next() ) {
+//				    System.out.println("Salesperson");
+//				    /* Salesperson */
+//				    bean.setGunner(false);
+//				}
+//				else
+//					bean.setGunner(true);
+				
 			}
 		}
 		catch (Exception ex)
