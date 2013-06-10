@@ -23,12 +23,8 @@ public class SalesServlet extends HttpServlet {
 		{
 			System.out.println("In the Sales Servlet");
 //			HttpSession session = request.getSession();
-
 			List<SaleBean> list = QueryDao.query("SELECT * FROM sale;");  
 			request.setAttribute("list", list);
-			for(SaleBean a:list){
-				System.out.println(a.getId());
-			}
 			request.getRequestDispatcher("/sales.jsp").forward(request, response);
 			
 		} catch (Throwable exc)

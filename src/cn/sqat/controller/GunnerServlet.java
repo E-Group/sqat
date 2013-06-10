@@ -18,13 +18,13 @@ import cn.sqat.model.TownBean;
 /**
  * Servlet implementation class LoginServlet
  */
-public class LoginServlet extends HttpServlet {
+public class GunnerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public LoginServlet() {
+	public GunnerServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -37,26 +37,10 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try
 		{
-			System.out.println("In the Login Servlet");
-			LoginBean user = new LoginBean();
-			user.setUserName(request.getParameter("email"));
-			user.setPassword(request.getParameter("pass"));
-			user = LoginDao.login(user);
-			if(user.isValid())
-			{
-				HttpSession session = request.getSession(true);
-				session.setAttribute("user", user.getUsername());
-				session.setAttribute("id", user.getId());
-				session.setAttribute("loginbean", user);
-				
-				
-				List<TownBean> list = QueryDao.queryTowns("SELECT * FROM town;");  
-				session.setAttribute("townlist", list);
-				request.getRequestDispatcher("/add_sale.jsp").forward(request, response);
-			}else{
-				request.setAttribute("message", "Unknown username or password, try again");
-				request.getRequestDispatcher("/index.jsp").forward(request, response);
-			}
+			System.out.println("In the Gunner Servlet");
+
+			
+			
 		} catch (Throwable exc)
 		{
 			System.out.println(exc);

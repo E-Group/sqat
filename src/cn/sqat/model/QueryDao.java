@@ -12,19 +12,46 @@ public class QueryDao {
 
 	static Connection currentCon = null;
 	static ResultSet rs = null;
-	public static List<SaleBean> query(String query)
+
+	public static List<TownBean> queryTowns(String query)
 	{
-		List<SaleBean> dataList = new ArrayList<SaleBean>(); 
+		List<TownBean> dataList = new ArrayList<TownBean>(); 
 		Statement stmt = null;
-//		String searchQuery = "select * from user u where u.name = '"+username+"' AND u.password = '"+password+"'";
-		
+
 		try
 		{
 			//connecting to the DB
 			currentCon = ConnectionManager.getConnection();
 			stmt=currentCon.createStatement();
 			rs = stmt.executeQuery(query);
-			
+
+			while (rs.next()){
+				TownBean b = new TownBean();
+				b.setId(rs.getInt("id"));
+				b.setName(rs.getString("name"));
+				dataList.add(b);
+			}
+		}
+		catch (Exception ex)
+		{
+			System.out.println("Query failed: An Exception has occurred! " + ex);
+		}
+		return dataList;
+	}
+
+	public static List<SaleBean> query(String query)
+	{
+		List<SaleBean> dataList = new ArrayList<SaleBean>(); 
+		Statement stmt = null;
+		//		String searchQuery = "select * from user u where u.name = '"+username+"' AND u.password = '"+password+"'";
+
+		try
+		{
+			//connecting to the DB
+			currentCon = ConnectionManager.getConnection();
+			stmt=currentCon.createStatement();
+			rs = stmt.executeQuery(query);
+
 			while (rs.next()){
 				//Add records into data list
 				SaleBean sb = new SaleBean();
@@ -36,16 +63,16 @@ public class QueryDao {
 				sb.setQuantity(rs.getInt("quantity"));
 				dataList.add(sb);
 			}
-			
-//			boolean userExists = rs.next();
-//			if (!userExists)
-//			{
-//			
-//			}
-//			else if (userExists)
-//			{
-//
-//			}
+
+			//			boolean userExists = rs.next();
+			//			if (!userExists)
+			//			{
+			//			
+			//			}
+			//			else if (userExists)
+			//			{
+			//
+			//			}
 
 		}
 		catch (Exception ex)

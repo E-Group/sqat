@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1" import="java.util.*"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,7 +12,9 @@
 		window.location = "/Commission/index.jsp";
 	}
 </script>
-<jsp:include page="nav.jsp"/>
+
+<jsp:include page="nav_sales.jsp" />
+
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Commission</title>
 <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -41,11 +46,9 @@
 				<tr>
 					<td>Town</td>
 					<td><select name="town">
-							<!-- populate list exampe: http://stackoverflow.com/questions/3267837/how-to-populate-a-drop-down-list-from-the-database-with-jstl -->
-							<option value="1">Phoenix</option>
-							<option value="2">Tucson</option>
-							<option value="3">Mesa</option>
-							<option value="4">Chandler</option>
+							<c:forEach items="${townlist}" var="element">
+								<option value="${element.id}">${element.name}</option>
+							</c:forEach>
 					</select></td>
 				</tr>
 				<tr>
@@ -89,8 +92,9 @@
 			$('#dp3').datepicker();
 		});
 	</script>
-	
-	<jsp:include page="footer.jsp"/>
-	
+
+	<jsp:include page="footer.jsp" />
+
+
 </body>
 </html>

@@ -80,7 +80,7 @@ public class TelegramServlet extends HttpServlet {
 			}
 			else {
 				request.setAttribute("message", error);
-				request.getRequestDispatcher("/sucess.jsp").forward(request, response);
+				request.getRequestDispatcher("/add_sale.jsp").forward(request, response);
 			}
 
 		} catch (Throwable exc)
