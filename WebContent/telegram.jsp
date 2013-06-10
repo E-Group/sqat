@@ -5,7 +5,6 @@
 
 <html>
 <head>
-
 <script>
 	if ('${loginbean.isValid()}') {
 	} else {

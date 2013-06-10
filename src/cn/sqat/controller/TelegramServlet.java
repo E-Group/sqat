@@ -13,46 +13,42 @@ import cn.sqat.model.TelegramDao;
 
 public class TelegramServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	private static final String ERROR_LOCKS = "Number of locks should be a number between 1 and 70. \n ";
-	private static final String ERROR_STOCKS = "Number of stocks should be a number between 1 and 80. \n";
-	private static final String ERROR_BARRELS = "Number of barrels should be a number between 1 and 90. \n";
-
-	protected String validate(HttpServletRequest request){
-		StringBuilder sb = new StringBuilder();
-		HttpSession userSession = request.getSession();
-		String town = request.getParameter("town");
+	private StringBuilder sb;
+	private static final String ERROR_LOCKS = "Sold locks should be a number between 1 and 70. \n ";
+	private static final String ERROR_STOCKS = "Sold stocks should be a number between 1 and 80. \n";
+	private static final String ERROR_BARRELS = "Sold barrels should be a number between 1 and 90. \n";
+	
+	private void checkInput(String str, int lower, int upper) {
+			int value = Integer.parseInt(str);
+			if(value < lower || value > upper){
+				throw new NumberFormatException();
+			}
+	}
+	
+	private String validate(HttpServletRequest request){
+		sb = new StringBuilder();
+		
 		String locks = request.getParameter("locks");
 		String stocks = request.getParameter("stocks");
 		String barrels = request.getParameter("barrels");
 		String saledate = request.getParameter("saledate");
-		int nolock = 0;
-		int nostocks = 0;
-		int nobarrels = 0;
-
+		
 		try{
-			nolock = Integer.parseInt(locks);
-		}catch(NumberFormatException e){
+			System.out.println("Locks value: " +locks);
+		checkInput(locks,1,70);
+		} catch(NumberFormatException e){
 			sb.append(ERROR_LOCKS);
 		}
+		
 		try{
-			nostocks = Integer.parseInt(stocks);
-		}catch(NumberFormatException e){
+		checkInput(stocks,1,80);
+		} catch(NumberFormatException e){
 			sb.append(ERROR_STOCKS);
 		}
+		
 		try{
-			nobarrels = Integer.parseInt(barrels);
-		}catch(NumberFormatException e){
-			sb.append(ERROR_BARRELS);
-		}
-
-		if(nolock < 1 || nolock >70){
-			sb.append(ERROR_LOCKS);
-		}
-		else if(nostocks < 1 || nostocks > 80){
-			sb.append(ERROR_STOCKS);
-		}
-		if(nobarrels < 1 || nobarrels > 90){
+		checkInput(barrels,1,90);
+		} catch(NumberFormatException e){
 			sb.append(ERROR_BARRELS);
 		}
 
@@ -79,7 +75,7 @@ public class TelegramServlet extends HttpServlet {
 
 				System.out.println("Date: "+tele.getDate());
 				tele = TelegramDao.submit(tele);
-				userSession.setAttribute("telegrambean", tele);
+				request.setAttribute("telegrambean", tele);
 				request.getRequestDispatcher("/telegram.jsp").forward(request, response);
 			}
 			else {
