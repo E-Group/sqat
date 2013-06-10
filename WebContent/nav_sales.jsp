@@ -11,7 +11,7 @@
           <a class="brand" href="#">Commission</a>
           <div class="nav-collapse collapse">
             <p class="navbar-text pull-right">
-              Logged in as ${loginbean.username}
+              Logged in as ${loginbean.username}, working for ${loginbean.gunsmith}
             </p>
             <ul class="nav">
               <li class="active"><a href="add_sale.jsp">Add sale</a></li>
