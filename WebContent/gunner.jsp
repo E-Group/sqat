@@ -12,48 +12,14 @@
 		window.location = "/Commission/index.jsp";
 	}
 </script>
-
-<jsp:include page="nav_sales.jsp" />
-
+<jsp:include page="nav_gunner.jsp" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Commission</title>
 <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link href="css/bootstrap-responsive.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet" type="text/css">
 </head>
-
 <body>
-
-	<div class="container">
-		<div class="form">
-		<h2 class="form-heading">Sales</h2>
-			<table class="table table-striped table-bordered">
-			<caption>Your sales</caption>
-				<thead>
-					<tr>
-						<th>id</th>
-						<th>town</th>
-						<th>item</th>
-						<th>date</th>
-						<th>quantity</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${list}" var="element">
-						<tr>
-							<td>${element.id}</td>
-							<td>${element.town}</td>					
-							<td>${element.item}</td>
-							<td>${element.date}</td>
-							<td>${element.quantity}</td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-		</div>
-	</div>
-	
 	<jsp:include page="footer.jsp" />
-
 </body>
 </html>

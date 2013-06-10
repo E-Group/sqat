@@ -1,14 +1,19 @@
 package cn.sqat.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import cn.sqat.model.ItemBean;
 import cn.sqat.model.LoginBean;
 import cn.sqat.model.LoginDao;
+import cn.sqat.model.QueryDao;
+import cn.sqat.model.TownBean;
 
 /**
  * Servlet implementation class LoginServlet
@@ -43,7 +48,18 @@ public class LoginServlet extends HttpServlet {
 				session.setAttribute("user", user.getUsername());
 				session.setAttribute("id", user.getId());
 				session.setAttribute("loginbean", user);
-				request.getRequestDispatcher("/sucess.jsp").forward(request, response);
+				
+				
+				List<TownBean> townlist = QueryDao.queryTowns("SELECT * FROM town;");  
+				session.setAttribute("townlist", townlist);
+				
+				List<ItemBean> itemlist = QueryDao.queryItems("SELECT * FROM item;");  
+				session.setAttribute("itemlist", itemlist);				
+				
+//				List<TownBean> gunsmith = QueryDao.queryTowns("SELECT * FROM gunsmith WHERE id;");  
+//				session.setAttribute("gunsmith", gunsmith);
+				
+				request.getRequestDispatcher("/add_sale.jsp").forward(request, response);
 			}else{
 				request.setAttribute("message", "Unknown username or password, try again");
 				request.getRequestDispatcher("/index.jsp").forward(request, response);

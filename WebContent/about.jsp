@@ -3,13 +3,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<jsp:include page="nav.jsp" />
+
 <script>
 	if ('${loginbean.isValid()}') {
 	} else {
 		window.location = "/Commission/index.jsp";
 	}
 </script>
+
+<!-- MAKE A CHECK OF WHICH NAV BAR TO SHOW -->
+<jsp:include page="nav_sales.jsp" />
+
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Commission</title>
 <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
