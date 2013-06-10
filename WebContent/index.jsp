@@ -2,6 +2,7 @@
 <html>
 <html lang="en">
 <head>
+
 <meta charset="utf-8">
 <title>Commission</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,10 +19,12 @@
 		<form class="form-signin" action="LoginServlet">
 			<h2 class="form-signin-heading">Please sign in</h2>
 			<input type="text" name="email" class="input-block-level"
-				placeholder="Username"> <input type="password"
-				name="pass" class="input-block-level" placeholder="Password">
+				placeholder="Username"> <input type="password" name="pass"
+				class="input-block-level" placeholder="Password">
 			<button class="btn btn-large btn-primary" type="submit">Sign
 				in</button>
+			<p class="error-msg">${message}</p>
+			<c:remove var="message" scope="session" />
 		</form>
 	</div>
 </body>

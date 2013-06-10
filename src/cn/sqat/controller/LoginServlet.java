@@ -43,10 +43,10 @@ public class LoginServlet extends HttpServlet {
 				session.setAttribute("user", user.getUsername());
 				session.setAttribute("id", user.getId());
 				session.setAttribute("loginbean", user);
-				response.sendRedirect("sucess.jsp");
+				request.getRequestDispatcher("/sucess.jsp").forward(request, response);
 			}else{
-				request.setAttribute("message", "Unknown login, try again");
-				response.sendRedirect("index.jsp");
+				request.setAttribute("message", "Unknown username or password, try again");
+				request.getRequestDispatcher("/index.jsp").forward(request, response);
 			}
 		} catch (Throwable exc)
 		{

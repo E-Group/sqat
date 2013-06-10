@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"  import="java.util.*" %>
- 
- <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+ <!-- 
+ %@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+  -->
  <!-- TROR ATT DET SKA LÖSA SIG OM VI IMPORTERAR -->
  <!-- NÅGON GREJ TILL PROJEKET, SOM SKA STÖDJA DETTA -->
  <!-- NÅOGOT BIBLITEK TYP -->
