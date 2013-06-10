@@ -38,8 +38,6 @@ public class GunnerServlet extends HttpServlet {
 		try
 		{
 			System.out.println("In the Gunner Servlet");
-
-			
 			
 		} catch (Throwable exc)
 		{

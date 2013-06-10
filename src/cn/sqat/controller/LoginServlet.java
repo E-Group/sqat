@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import cn.sqat.model.LoginBean;
 import cn.sqat.model.LoginDao;
 import cn.sqat.model.QueryDao;
-import cn.sqat.model.SaleBean;
+import cn.sqat.model.SalesPersonBean;
 import cn.sqat.model.TownBean;
 
 /**
@@ -28,9 +28,23 @@ public class LoginServlet extends HttpServlet {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public static void logout(){
-		
+	
+	
+	public void initSalesPerson(HttpServletRequest request){
+		HttpSession session = request.getSession();
+		List<TownBean> list = QueryDao.queryTowns("SELECT * FROM town;");  
+		session.setAttribute("townlist", list);
 	}
+	
+	public void initGunner(HttpServletRequest request, LoginBean user){
+		HttpSession session = request.getSession();
+		List<SalesPersonBean> list = QueryDao.querySalesPersons(
+				"SELECT user.name, user.id FROM salesperson JOIN user ON salesperson.id = user.id " +
+				"AND salesperson.gunsmith = "+user.getId()+" GROUP BY user.name;");
+		
+		session.setAttribute("salespersonlist", list);
+	}
+	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -42,17 +56,22 @@ public class LoginServlet extends HttpServlet {
 			user.setUserName(request.getParameter("email"));
 			user.setPassword(request.getParameter("pass"));
 			user = LoginDao.login(user);
+			
 			if(user.isValid())
 			{
 				HttpSession session = request.getSession(true);
 				session.setAttribute("user", user.getUsername());
 				session.setAttribute("id", user.getId());
 				session.setAttribute("loginbean", user);
-				
-				
-				List<TownBean> list = QueryDao.queryTowns("SELECT * FROM town;");  
-				session.setAttribute("townlist", list);
-				request.getRequestDispatcher("/add_sale.jsp").forward(request, response);
+
+				if(user.isGunner()){
+					initGunner(request, user);
+					request.getRequestDispatcher("/gunner.jsp").forward(request, response);
+				}
+				else {
+					initSalesPerson(request);
+					request.getRequestDispatcher("/add_sale.jsp").forward(request, response);
+				}
 			}else{
 				request.setAttribute("message", "Unknown username or password, try again");
 				request.getRequestDispatcher("/index.jsp").forward(request, response);

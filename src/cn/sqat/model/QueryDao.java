@@ -12,7 +12,34 @@ public class QueryDao {
 
 	static Connection currentCon = null;
 	static ResultSet rs = null;
+	
+	public static List<SalesPersonBean> querySalesPersons(String query)
+	{
+		List<SalesPersonBean> dataList = new ArrayList<SalesPersonBean>(); 
+		Statement stmt = null;
 
+		try
+		{
+			//connecting to the DB
+			currentCon = ConnectionManager.getConnection();
+			stmt=currentCon.createStatement();
+			rs = stmt.executeQuery(query);
+
+			while (rs.next()){
+				SalesPersonBean b = new SalesPersonBean();
+				b.setId(rs.getInt("id"));
+				b.setName(rs.getString("name"));
+				dataList.add(b);
+			}
+		}
+		catch (Exception ex)
+		{
+			System.out.println("Query failed: An Exception has occurred! " + ex);
+		}
+		return dataList;
+	}
+
+	
 	public static List<TownBean> queryTowns(String query)
 	{
 		List<TownBean> dataList = new ArrayList<TownBean>(); 

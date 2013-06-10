@@ -9,6 +9,7 @@ import cn.sqat.util.ConnectionManager;
 public class LoginDao{
 	static Connection currentCon = null;
 	static ResultSet rs = null;
+
 	public static LoginBean login(LoginBean bean)
 	{
 		Statement stmt = null;
@@ -31,17 +32,20 @@ public class LoginDao{
 			}
 			else if (userExists)
 			{
-//				String user = rs.getString("name");
-				System.out.println("Welcome " + username);
-//				bean.setUsername(firstName);
-				bean.setValid(true);
-				
 				int id = rs.getInt("id");
-				System.out.println("id: "+id);
+				bean.setValid(true);
 				bean.setId(id);
 				
+				stmt = currentCon.createStatement();
+				rs = stmt.executeQuery("select * from gunsmith where id ="+bean.getId()+";");
+				if (!rs.next() ) {
+				    System.out.println("Salesperson");
+				    /* Salesperson */
+				    bean.setGunner(false);
+				}
+				else
+					bean.setGunner(true);
 			}
-
 		}
 		catch (Exception ex)
 		{
