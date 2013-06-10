@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Värd: localhost
--- Skapad: 10 jun 2013 kl 12:59
+-- Skapad: 10 jun 2013 kl 14:23
 -- Serverversion: 5.5.20
 -- PHP-version: 5.3.10
 
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `gunsmith` (
   `id` int(11) NOT NULL,
-  `location` int(11) NOT NULL,
+  `location` varchar(20) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -36,8 +36,8 @@ CREATE TABLE IF NOT EXISTS `gunsmith` (
 -- Dumpning av Data i tabell `gunsmith`
 --
 
-INSERT INTO `gunsmith` (`id`, `location`) VALUES
-(1, 0);
+INSERT INTO `gunsmith` (`id`,`location`) VALUES
+(1, 'Missouri');
 
 -- --------------------------------------------------------
 
@@ -59,9 +59,9 @@ CREATE TABLE IF NOT EXISTS `item` (
 --
 
 INSERT INTO `item` (`id`, `gunsmith`, `name`, `price`) VALUES
-(1, 1, 'lock', 45),
-(2, 1, 'stock', 30),
-(3, 1, 'barrel', 25);
+(1, 1, 'Lock', 45),
+(2, 1, 'Stock', 30),
+(3, 1, 'Barrel', 25);
 
 -- --------------------------------------------------------
 
@@ -75,6 +75,14 @@ CREATE TABLE IF NOT EXISTS `report` (
   `salary` int(11) NOT NULL,
   PRIMARY KEY (`salesperson`,`month`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumpning av Data i tabell `report`
+--
+
+INSERT INTO `report` (`salesperson`, `month`, `salary`) VALUES
+(2, '2013-01-01', 2000),
+(3, '2013-01-01', 2500);
 
 -- --------------------------------------------------------
 
