@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import cn.sqat.model.QueryDao;
 import cn.sqat.model.SaleBean;
@@ -22,8 +23,12 @@ public class SalesServlet extends HttpServlet {
 		try
 		{
 			System.out.println("In the Sales Servlet");
-//			HttpSession session = request.getSession();
-			List<SaleBean> list = QueryDao.query("SELECT * FROM sale;");  
+			HttpSession session = request.getSession();
+			request.getAttribute("user");
+			// TODO: borde flytta query till querydao
+			List<SaleBean> list = QueryDao.querySales("SELECT * FROM sale,town,item WHERE " +
+					"salesperson='"+session.getAttribute("id")+"' AND " +
+							"town.id=sale.town AND item.id=sale.item ORDER BY date DESC;");			
 			request.setAttribute("list", list);
 			request.getRequestDispatcher("/sales.jsp").forward(request, response);
 			

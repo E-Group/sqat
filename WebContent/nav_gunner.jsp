@@ -14,8 +14,7 @@
               Logged in as ${loginbean.username}
             </p>
             <ul class="nav">
-              <li class="active"><a href="add_sale.jsp">Add sale</a></li>
-              <li><a href="<%=request.getContextPath()%>/SalesServlet">Sales</a></li>
+              <li class="active"><a href="gunner.jsp">Gunsmith Home</a></li>
               <li><a href="about.jsp">About</a></li>
               <li><a href="<%=request.getContextPath()%>/LogoutServlet">Logout</a></li>
             </ul>

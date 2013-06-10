@@ -11,6 +11,7 @@
 	}
 </script>
 
+<!-- MAKE A CHECK OF WHICH NAV BAR TO SHOW -->
 <jsp:include page="nav_sales.jsp" />
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">

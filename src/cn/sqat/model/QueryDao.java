@@ -4,7 +4,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import cn.sqat.util.ConnectionManager;
 
@@ -53,10 +56,37 @@ public class QueryDao {
 			rs = stmt.executeQuery(query);
 
 			while (rs.next()){
-				TownBean b = new TownBean();
-				b.setId(rs.getInt("id"));
-				b.setName(rs.getString("name"));
-				dataList.add(b);
+				TownBean tb = new TownBean();
+				tb.setId(rs.getInt("id"));
+				tb.setName(rs.getString("name"));
+				dataList.add(tb);
+			}
+		}
+		catch (Exception ex)
+		{
+			System.out.println("Query failed: An Exception has occurred! " + ex);
+		}
+		return dataList;
+	}
+	
+	public static List<ItemBean> queryItems(String query)
+	{
+		List<ItemBean> dataList = new ArrayList<ItemBean>(); 
+		Statement stmt = null;
+
+		try
+		{
+			//connecting to the DB
+			currentCon = ConnectionManager.getConnection();
+			stmt=currentCon.createStatement();
+			rs = stmt.executeQuery(query);
+
+			while (rs.next()){
+				ItemBean ib = new ItemBean();
+				ib.setId(rs.getInt("id"));
+				ib.setName(rs.getString("name"));
+				ib.setPrice(rs.getInt("price"));
+				dataList.add(ib);
 			}
 		}
 		catch (Exception ex)
@@ -66,7 +96,7 @@ public class QueryDao {
 		return dataList;
 	}
 
-	public static List<SaleBean> query(String query)
+	public static List<SaleBean> querySales(String query)
 	{
 		List<SaleBean> dataList = new ArrayList<SaleBean>(); 
 		Statement stmt = null;
@@ -83,23 +113,15 @@ public class QueryDao {
 				//Add records into data list
 				SaleBean sb = new SaleBean();
 				sb.setId(rs.getInt("id"));
+				
 				sb.setSalesperson(rs.getInt("salesperson"));
-				sb.setTown(rs.getInt("town"));
-				sb.setItem(rs.getInt("item"));
+				sb.setTown(rs.getString("town.name"));
+				sb.setItem(rs.getString("item.name"));
+				
 				sb.setDate(rs.getString("date"));
 				sb.setQuantity(rs.getInt("quantity"));
 				dataList.add(sb);
 			}
-
-			//			boolean userExists = rs.next();
-			//			if (!userExists)
-			//			{
-			//			
-			//			}
-			//			else if (userExists)
-			//			{
-			//
-			//			}
 
 		}
 		catch (Exception ex)

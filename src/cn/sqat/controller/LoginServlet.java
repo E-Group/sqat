@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import cn.sqat.model.ItemBean;
 import cn.sqat.model.LoginBean;
 import cn.sqat.model.LoginDao;
 import cn.sqat.model.QueryDao;
@@ -72,6 +73,7 @@ public class LoginServlet extends HttpServlet {
 					initSalesPerson(request);
 					request.getRequestDispatcher("/add_sale.jsp").forward(request, response);
 				}
+
 			}else{
 				request.setAttribute("message", "Unknown username or password, try again");
 				request.getRequestDispatcher("/index.jsp").forward(request, response);

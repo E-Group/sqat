@@ -2,8 +2,8 @@ package cn.sqat.model;
 
 public class SaleBean {
 
-	private int id, salesperson, town, item, quantity;
-	String date;
+	private int id, quantity, salesperson;
+	String town, item, date;
 	
 	public int getId() {
 		return id;
@@ -17,16 +17,16 @@ public class SaleBean {
 	public void setSalesperson(int salesperson) {
 		this.salesperson = salesperson;
 	}
-	public int getTown() {
+	public String getTown() {
 		return town;
 	}
-	public void setTown(int town) {
+	public void setTown(String town) {
 		this.town = town;
 	}
-	public int getItem() {
+	public String getItem() {
 		return item;
 	}
-	public void setItem(int item) {
+	public void setItem(String item) {
 		this.item = item;
 	}
 	public int getQuantity() {
