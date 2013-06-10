@@ -20,6 +20,19 @@
 <link href="css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+	<div class="container">
+		<div class="form">
+			<h2 class="form-heading">Gunner view</h2>
+			<div class="well-large">
+				<select name="salespersons">
+					<c:forEach items="${salespersonlist}" var="element">
+						<option>${element.name}</option>
+					</c:forEach>
+				</select>
+				<a href="<%=request.getContextPath()%>/SalesServlet"><button class="btn btn-info">View sales</button>
+			</div>
+		</div>
+	</div>
 	<jsp:include page="footer.jsp" />
 </body>
 </html>
