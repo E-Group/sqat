@@ -23,8 +23,7 @@
 				class="input-block-level" placeholder="Password">
 			<button class="btn btn-large btn-primary" type="submit">Sign
 				in</button>
-			<p class="error-msg">${message}</p>
-			<c:remove var="message" scope="session" />
+			<p class="text-error">${message}</p>
 		</form>
 	</div>
 </body>

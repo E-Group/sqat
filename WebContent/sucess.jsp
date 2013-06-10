@@ -50,15 +50,15 @@
 				</tr>
 				<tr>
 					<td>Sold locks</td>
-					<td><INPUT TYPE=number NAME=locks></td>
+					<td><INPUT TYPE="number" NAME=locks required></td>
 				</tr>
 				<tr>
 					<td>Sold stocks</td>
-					<td><INPUT TYPE=number NAME=stocks></td>
+					<td><INPUT TYPE=number NAME=stocks required></td>
 				</tr>
 				<tr>
 					<td>Sold barrels</td>
-					<td><INPUT TYPE=number NAME=barrels></td>
+					<td><INPUT TYPE=number NAME=barrels required></td>
 				</tr>
 				<tr>
 				<tr>
@@ -76,7 +76,7 @@
 						VALUE='Send telegram'></td>
 				</tr>
 			</table>
-			<p class="error-msg">${message}</p>
+			<p class="text-error">${message}</p>
 			<c:remove var="message" scope="session" />
 		</form>
 	</div>
