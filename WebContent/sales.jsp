@@ -26,10 +26,10 @@
 		<div class="form">
 		<h2 class="form-heading">Sales</h2>
 			<table class="table table-striped table-bordered">
+			<caption>Your sales</caption>
 				<thead>
 					<tr>
 						<th>id</th>
-						<th>salesperson</th>
 						<th>town</th>
 						<th>item</th>
 						<th>date</th>
@@ -40,7 +40,6 @@
 					<c:forEach items="${list}" var="element">
 						<tr>
 							<td>${element.id}</td>
-							<td>${element.salesperson}</td>
 							<td>${element.town}</td>							
 							<td>${element.item}</td>
 							<td>${element.date}</td>
