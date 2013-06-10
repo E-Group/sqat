@@ -2,11 +2,8 @@ package cn.sqat.model;
 
 //Data Encapsulation using Getters and Setters
 public class LoginBean {
-	private String id;
-	private String username;
-	private String password;
-	public boolean valid;
-	public boolean gunner;
+	private String id, username, password, gunsmith;
+	public boolean valid, gunner;
 
 	public String getId()
 	{
@@ -45,5 +42,11 @@ public class LoginBean {
 	}
 	public void setGunner(boolean gunner) {
 		this.gunner = gunner;
+	}
+	public String getGunsmith() {
+		return gunsmith;
+	}
+	public void setGunsmith(String gunsmith) {
+		this.gunsmith = gunsmith;
 	}
 }

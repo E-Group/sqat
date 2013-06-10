@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import cn.sqat.model.QueryDao;
-import cn.sqat.model.SaleBean;
+import cn.sqat.model.ReportBean;
 
 public class ReportServlet extends HttpServlet {
 
@@ -22,15 +22,11 @@ public class ReportServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try
 		{
-//			System.out.println("In the Salary Servlet");
 			HttpSession session = request.getSession();
 			request.getAttribute("user");
-			// TODO: borde flytta query till querydao
-			List<SaleBean> list = QueryDao.queryReports("SELECT * FROM report,salesperson,user WHERE " +
-					"salesperson='"+session.getAttribute("id")+"' AND " +
-							"town.id=sale.town AND item.id=sale.item ORDER BY date DESC;");			
+			List<ReportBean> list = QueryDao.queryReports(session.getAttribute("id"));			
 			request.setAttribute("list", list);
-			request.getRequestDispatcher("/sales.jsp").forward(request, response);
+			request.getRequestDispatcher("/salary.jsp").forward(request, response);
 			
 		} catch (Throwable exc)
 		{
