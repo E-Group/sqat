@@ -27,7 +27,7 @@
 <body>
 	<div class="container">
 		<div class="form form-table">
-			<h2 class="form-heading">Gunner view</h2>
+			<h2 class="form-heading">Sales</h2>
 			<div style="max-width: 400px;">
 				<%-- 				<form action="SalesServlet">
 					<div class="input-append date" id="datepicker" data-date="2013-06">
