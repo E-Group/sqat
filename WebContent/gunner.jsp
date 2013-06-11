@@ -20,7 +20,7 @@
 <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
 <link href="css/bootstrap-responsive.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet" type="text/css">
-<
+
 <style type="text/css">
 </style>
 </head>

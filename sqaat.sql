@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Värd: localhost
--- Skapad: 10 jun 2013 kl 14:23
+-- Skapad: 11 jun 2013 kl 07:55
 -- Serverversion: 5.5.20
 -- PHP-version: 5.3.10
 
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `gunsmith` (
 -- Dumpning av Data i tabell `gunsmith`
 --
 
-INSERT INTO `gunsmith` (`id`,`location`) VALUES
+INSERT INTO `gunsmith` (`id`, `location`) VALUES
 (1, 'Missouri');
 
 -- --------------------------------------------------------
@@ -72,7 +72,7 @@ INSERT INTO `item` (`id`, `gunsmith`, `name`, `price`) VALUES
 CREATE TABLE IF NOT EXISTS `report` (
   `salesperson` int(11) NOT NULL,
   `month` date NOT NULL,
-  `salary` int(11) NOT NULL,
+  `salary` int(11) DEFAULT NULL,
   PRIMARY KEY (`salesperson`,`month`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -101,22 +101,43 @@ CREATE TABLE IF NOT EXISTS `sale` (
   KEY `sale_ibfk_1` (`salesperson`),
   KEY `sale_ibfk_2` (`town`),
   KEY `sale_ibfk_3` (`item`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=37 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=46 ;
 
 --
 -- Dumpning av Data i tabell `sale`
 --
 
 INSERT INTO `sale` (`id`, `salesperson`, `town`, `item`, `date`, `quantity`) VALUES
-(1, 2, 2, 1, '2000-01-01', 3),
-(2, 2, 2, 2, '2000-01-01', 4),
-(3, 2, 2, 3, '2000-01-01', 5),
-(4, 3, 2, 1, '2000-01-01', 3),
-(5, 3, 2, 2, '2000-01-01', 4),
-(6, 3, 2, 3, '2000-01-01', 5),
-(7, 2, 4, 1, '2000-01-01', 11),
-(8, 2, 4, 2, '2000-01-01', 11),
-(9, 2, 4, 3, '2000-01-01', 11);
+(16, 3, 1, 1, '2013-01-05', 10),
+(17, 3, 1, 2, '2013-01-05', 10),
+(18, 3, 1, 3, '2013-01-05', 10),
+(19, 3, 2, 1, '2013-01-22', 4),
+(20, 3, 2, 2, '2013-01-22', 8),
+(21, 3, 2, 3, '2013-01-22', 8),
+(22, 3, 3, 1, '2013-02-05', 5),
+(23, 3, 3, 2, '2013-02-05', 5),
+(24, 3, 3, 3, '2013-02-05', 5),
+(25, 3, 4, 1, '2013-02-26', 10),
+(26, 3, 4, 2, '2013-02-26', 1),
+(27, 3, 4, 3, '2013-02-26', 1),
+(28, 2, 5, 1, '2013-01-08', 5),
+(29, 2, 5, 2, '2013-01-08', 5),
+(30, 2, 5, 3, '2013-01-08', 5),
+(31, 2, 4, 1, '2013-01-24', 10),
+(32, 2, 4, 2, '2013-01-24', 5),
+(33, 2, 4, 3, '2013-01-24', 5),
+(34, 2, 2, 1, '2013-02-18', 2),
+(35, 2, 2, 2, '2013-02-18', 2),
+(36, 2, 2, 3, '2013-02-18', 10),
+(37, 2, 1, 1, '2013-02-13', 8),
+(38, 2, 1, 2, '2013-02-13', 5),
+(39, 2, 1, 3, '2013-02-13', 5),
+(40, 2, 2, 1, '2013-03-27', 15),
+(41, 2, 2, 2, '2013-03-27', 5),
+(42, 2, 2, 3, '2013-03-27', 20),
+(43, 3, 1, 1, '2013-03-18', 15),
+(44, 3, 1, 2, '2013-03-18', 5),
+(45, 3, 1, 3, '2013-03-18', 5);
 
 -- --------------------------------------------------------
 

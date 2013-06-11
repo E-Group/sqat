@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html>
 <html lang="en">
 <head>
 
-<meta charset="utf-8">
 <title>Commission</title>
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
@@ -14,7 +13,9 @@
 <link href="css/style.css" rel="stylesheet" type="text/css">
 
 </head>
+
 <body>
+
 	<div class="container">
 		<form class="form-signin" action="LoginServlet">
 			<h2 class="form-signin-heading">Please sign in</h2>
@@ -26,6 +27,8 @@
 			<p class="text-error">${message}</p>
 		</form>
 	</div>
+
 </body>
+
 </html>
 
