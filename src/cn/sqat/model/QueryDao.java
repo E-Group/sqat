@@ -2,11 +2,15 @@ package cn.sqat.model;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.sqat.util.ConnectionManager;
+
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+
 
 public class QueryDao {
 
@@ -138,7 +142,7 @@ public class QueryDao {
 			stmt=currentCon.createStatement();
 			rs = stmt.executeQuery("SELECT * FROM report,salesperson,user WHERE " +
 					"salesperson='"+id+"' AND " +
-					"salesperson.id=report.salesperson AND salesperson.id=user.id AND salary <> 0 ORDER BY month DESC;");
+					"salesperson.id=report.salesperson AND salesperson.id=user.id AND salary IS NOT NULL ORDER BY month DESC;");
 			while (rs.next()){
 				//Add records into data list
 				ReportBean rb = new ReportBean();
@@ -161,26 +165,39 @@ public class QueryDao {
 		int salesId = report.getId();
 		String month = report.getMonth();
 		System.out.println(month);
-		String insertQuery = "insert into report (salesperson, month, salary) values "+
-				"("+salesId+",'"+month+"',0);";
-
-		//		String searchQuery = "select * from user u where u.name = '"+username+"' AND u.password = '"+password+"'";
+		String insertQuery = "insert into report (salesperson, month) values "+
+				"("+salesId+",'"+month+"');";
+		String query = "SELECT * FROM sale WHERE date LIKE '"+report.getMonth().substring(0, 7)+"%' AND" +
+				" salesperson = "+report.getId()+";";
 
 		try
 		{
-			//connecting to the DB
 			currentCon = ConnectionManager.getConnection();
-			stmt=currentCon.createStatement();
-			if(!stmt.execute(insertQuery)){
-				System.out.println("Insert completed");
-				System.out.println("Rows updated: "+stmt.getUpdateCount());
-			}else{
-				System.out.println("Insert failed");
+			stmt = currentCon.createStatement();
+
+			rs = stmt.executeQuery(query);
+			boolean saleExist = rs.next();
+
+			if(saleExist){
+				if(!stmt.execute(insertQuery)){
+					System.out.println("Insert completed");
+					System.out.println("Rows updated: "+stmt.getUpdateCount());
+				}else{
+					System.out.println("Insert failed");
+				}
+			}
+			else{
+				report.setError("You have no sales to report, please select another month.");
 			}
 		}
 		catch (Exception ex)
 		{
 			System.out.println("DB failed: An Exception has occurred! " + ex);
+			report.setError("Error in Database, please try again.");
+			if(ex instanceof MySQLIntegrityConstraintViolationException){
+				report.setError("A sales report already exist for "+report.getMonth().substring(0, 7)+", please" +
+						" select another month.");
+			}
 		}
 		return report;
 	}

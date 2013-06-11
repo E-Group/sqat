@@ -26,24 +26,30 @@
 	<div class="container">
 		<div class="form form-table">
 			<h2 class="form-heading">Sales</h2>
+				<div class="btn-grp">
+					<form action="SalesServlet">
+						<div class="input-append date" id="datepicker" data-date="2013-06">
+							<input name="date" class="span1" size="16" type="text"
+								value="${selecteddate}" readonly> <span class="add-on"><i
+								class="icon-calendar" required></i></span>
 
-			<form action="SalesServlet">
-				<div class="input-append date" id="datepicker" data-date="2013-06">
-					<input name="date" class="span1" size="16" type="text"
-						value="${selecteddate}" readonly> <span class="add-on"><i
-						class="icon-calendar"></i></span>
-					<button name="filter" class="btn btn-info" type="submit">Filter
-						Months</button>
-					<span><i>
-							<button name="showall" class="btn btn-info" type="submit">Show
-								all</button>
-					</i> </span>
+
+							<button name="filter" class="btn btn-info" type="submit"
+								style="vertical-align: top;">Filter Months</button>
+
+							<button name="showall" class="btn btn-info" type="submit"
+								style="vertical-align: top;">Show all</button>
+						</div>
+					</form>
 				</div>
-			</form>
-			<form method="POST" action="ReportServlet">
-				<button name="report" class="btn btn-warning" type="submit" value="${selecteddate}">Send
-					report</button>
-			</form>
+				<div class="btn-grp">
+					<form method="POST" action="ReportServlet">
+						<button name="report" class="btn btn-warning ${filtered}"
+							type="submit" value="${selecteddate}"
+							style="vertical-align: top;">Send
+							report</button>
+					</form>
+				</div>
 			<p class="text-success">${message}</p>
 			<c:remove var="message" scope="session" />
 			<p class="text-error">${error}</p>
