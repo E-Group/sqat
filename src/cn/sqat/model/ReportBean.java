@@ -4,6 +4,7 @@ public class ReportBean {
 
 	private String salesperson, month;
 	private int salary, id;
+	private String error = "";
 	
 	public String getSalesperson() {
 		return salesperson;
@@ -28,6 +29,12 @@ public class ReportBean {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public String getError() {
+		return error;
+	}
+	public void setError(String error) {
+		this.error = error;
 	}
 	
 }

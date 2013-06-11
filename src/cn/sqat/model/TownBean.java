@@ -1,6 +1,9 @@
 package cn.sqat.model;
 
-public class TownBean  {
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public class TownBean implements Serializable {
 	
 	private int id;
 	private String name;

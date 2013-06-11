@@ -23,6 +23,7 @@ public class SalesServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try
 		{
+			System.out.println("In Sales Servlet Get Method");
 			HttpSession session = request.getSession();
 			String query;
 			String redirect;
@@ -30,7 +31,6 @@ public class SalesServlet extends HttpServlet {
 			String date = request.getParameter("date");
 			
 			String filter = request.getParameter("filter");
-			System.out.println("filter "+filter);
 
 			if(user.isGunner()){
 				String salesperson = request.getParameter("salespersons");
@@ -57,12 +57,14 @@ public class SalesServlet extends HttpServlet {
 							"salesperson='"+user.getId()+"' AND " +
 							"town.id=sale.town AND item.id=sale.item AND date LIKE '"+date+"%' ORDER BY date DESC;";		
 					request.setAttribute("selecteddate", date);
+					request.removeAttribute("filtered");
 				}
 
 				else  {
 					query = "SELECT * FROM sale,town,item WHERE " +
 							"salesperson='"+user.getId()+"' AND " +
 							"town.id=sale.town AND item.id=sale.item ORDER BY date DESC;";
+					request.setAttribute("filtered","hidden");
 				}
 				redirect = "/sales.jsp";
 			}
@@ -70,7 +72,7 @@ public class SalesServlet extends HttpServlet {
 			request.setAttribute("list", list);
 			request.getRequestDispatcher(redirect).forward(request, response);
 
-		} catch (NullPointerException e)
+		} catch (Exception e)
 		{
 			e.printStackTrace();
 		}

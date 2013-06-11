@@ -41,30 +41,30 @@ public class ReportServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try
 		{
+			System.out.println("In Report Servlet Post Method");
 			HttpSession userSession = request.getSession();
 			LoginBean user = (LoginBean) userSession.getAttribute("loginbean");
 
 			String date = request.getParameter("report");
 			String fullDate = date+"-01";
-			System.out.println(fullDate);
+
+			ReportBean report = new ReportBean();
+			report.setSalesperson(user.getUsername());
+			report.setMonth(fullDate);
+			report.setId(Integer.parseInt(user.getId()));
+			report = QueryDao.submitReport(report);
 			
-			if(date != null){
-				ReportBean report = new ReportBean();
-				report.setSalesperson(user.getUsername());
-				report.setMonth(fullDate);
-				report.setId(Integer.parseInt(user.getId()));
-				report = QueryDao.submitReport(report);
-				
-				request.setAttribute("message", date+" reported.");
-				request.getRequestDispatcher("/sales.jsp").forward(request, response);
-			} else {
-				request.setAttribute("error", "No month selected.");
-				request.getRequestDispatcher("/sales.jsp").forward(request, response);
+			if(report.getError().isEmpty()){
+			request.setAttribute("message", date+" reported.");
 			}
-		
-		} catch (Throwable exc)
+			else {
+				request.setAttribute("error", report.getError());
+			}
+			request.getRequestDispatcher("/sales.jsp").forward(request, response);
+
+		} catch (Exception e)
 		{
-			System.out.println(exc);
+			e.printStackTrace();
 		}
 	}
 }
