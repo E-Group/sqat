@@ -2,6 +2,7 @@ package cn.sqat.model;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import cn.sqat.util.ConnectionManager;
@@ -12,8 +13,25 @@ public class TelegramDao {
 	static ResultSet rs = null;
 	public static TelegramBean submit(TelegramBean bean)
 	{
-		
 		Statement stmt = null;
+
+		//connecting to the DB
+		currentCon = ConnectionManager.getConnection();
+		try {
+			stmt=currentCon.createStatement();
+			ResultSet rs = stmt.executeQuery("select * from report where month like '"+bean.getDate().substring(0,7)+"%' " +
+					"and salesperson="+bean.getId()+"");
+
+			boolean reportExists = rs.next();
+			if (reportExists){
+				throw new IllegalStateException();
+			}
+
+
+		} catch (SQLException e) {
+			System.out.println("DB failed: An Exception has occurred! " + e);
+		}
+
 		int id = bean.getId();
 		int town = bean.getTown();
 		int locks = bean.getLocks();
@@ -22,17 +40,11 @@ public class TelegramDao {
 		String date = bean.getDate();
 
 		String insertQuery = "insert into sale (salesperson, town, item, date, quantity) values "+
-						"("+id+","+town+",1,'"+date+"',"+locks+"),"+
-						"("+id+","+town+",2,'"+date+"',"+stocks+"),"+
-						"("+id+","+town+",3,'"+date+"',"+barrels+");";
-		
-		
-//		String searchQuery = "select * from user u where u.name = '"+username+"' AND u.password = '"+password+"'";
+				"("+id+","+town+",1,'"+date+"',"+locks+"),"+
+				"("+id+","+town+",2,'"+date+"',"+stocks+"),"+
+				"("+id+","+town+",3,'"+date+"',"+barrels+");";
 
-		try
-		{
-			//connecting to the DB
-			currentCon = ConnectionManager.getConnection();
+		try{
 			stmt=currentCon.createStatement();
 			if(!stmt.execute(insertQuery)){
 				System.out.println("Insert completed");
@@ -40,11 +52,9 @@ public class TelegramDao {
 			}else{
 				System.out.println("Insert failed");
 			}
-			
 
 		}
-		catch (Exception ex)
-		{
+		catch (Exception ex){
 			System.out.println("DB failed: An Exception has occurred! " + ex);
 		}
 		return bean;

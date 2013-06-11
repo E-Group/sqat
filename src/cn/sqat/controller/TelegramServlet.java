@@ -14,9 +14,9 @@ import cn.sqat.model.TelegramDao;
 public class TelegramServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private StringBuilder sb;
-	private static final String ERROR_LOCKS = "Sold locks should be a number between 1 and 70. \n ";
-	private static final String ERROR_STOCKS = "Sold stocks should be a number between 1 and 80. \n";
-	private static final String ERROR_BARRELS = "Sold barrels should be a number between 1 and 90. \n";
+	private static final String ERROR_LOCKS = "Sold locks should be a number between 1 and 70.<br> ";
+	private static final String ERROR_STOCKS = "Sold stocks should be a number between 1 and 80.<br>";
+	private static final String ERROR_BARRELS = "Sold barrels should be a number between 1 and 90.<br>";
 	
 	private void checkInput(String str, int lower, int upper) {
 			int value = Integer.parseInt(str);
@@ -31,7 +31,7 @@ public class TelegramServlet extends HttpServlet {
 		String locks = request.getParameter("locks");
 		String stocks = request.getParameter("stocks");
 		String barrels = request.getParameter("barrels");
-		String saledate = request.getParameter("saledate");
+		//String saledate = request.getParameter("saledate");
 		
 		try{
 			System.out.println("Locks value: " +locks);
@@ -74,7 +74,13 @@ public class TelegramServlet extends HttpServlet {
 				tele.setDate(request.getParameter("saledate"));
 
 				System.out.println("Date: "+tele.getDate());
-				tele = TelegramDao.submit(tele);
+				request.setAttribute("alreadyexists", "");
+				try {
+					tele = TelegramDao.submit(tele);
+				}catch(IllegalStateException e){
+					request.setAttribute("message", "<b>Specified month is already reported!</b>");
+					request.getRequestDispatcher("/add_sale.jsp").forward(request, response);
+				}
 				request.setAttribute("telegrambean", tele);
 				request.getRequestDispatcher("/telegram.jsp").forward(request, response);
 			}
