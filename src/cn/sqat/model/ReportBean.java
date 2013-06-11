@@ -3,7 +3,8 @@ package cn.sqat.model;
 public class ReportBean {
 
 	private String salesperson, month;
-	private int salary;
+	private int salary, id;
+	
 	public String getSalesperson() {
 		return salesperson;
 	}
@@ -21,6 +22,12 @@ public class ReportBean {
 	}
 	public void setSalary(int salary) {
 		this.salary = salary;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 }

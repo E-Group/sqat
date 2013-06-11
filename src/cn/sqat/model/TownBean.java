@@ -1,6 +1,7 @@
 package cn.sqat.model;
 
-public class TownBean {
+public class TownBean  {
+	
 	private int id;
 	private String name;
 	

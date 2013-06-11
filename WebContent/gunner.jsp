@@ -29,7 +29,7 @@
 		<div class="form form-table">
 			<h2 class="form-heading">Gunner view</h2>
 			<div style="max-width: 400px;">
-				<form action="SalesServlet">
+				<%-- 				<form action="SalesServlet">
 					<div class="input-append date" id="datepicker" data-date="2013-06">
 						<input name="date" class="span1" size="16" type="text"
 							value="${selecteddate}" readonly> <span class="add-on"><i
@@ -42,6 +42,26 @@
 						</c:forEach>
 					</select>
 					<button class="btn btn-info" type="submit"">View sales</button>
+				</form> --%>
+				<form action="SalesServlet">
+					<span><i> <select class="sale-dropdown"
+							name="salespersons">
+								<c:forEach items="${salespersonlist}" var="element">
+									<option value="${element.id}"
+										${element.id == selectedsales ? 'selected="selected"' : ''}>${element.name}</option>
+								</c:forEach>
+						</select></i></span>
+					<div class="input-append date" id="datepicker" data-date="2013-06">
+						<input name="date" class="span1" size="16" type="text"
+							value="${selecteddate}" readonly> <span class="add-on"><i
+							class="icon-calendar"></i></span>
+						<button name="filter" class="btn btn-info" type="submit">Filter
+						</button>
+						<span><i>
+								<button name="showall" class="btn btn-info" type="submit">Show
+									all</button>
+						</i> </span>
+					</div>
 				</form>
 			</div>
 			<table class="table table-striped table-bordered">
@@ -70,7 +90,6 @@
 		</div>
 	</div>
 	<jsp:include page="footer.jsp" />
-
 	<!-- JS -->
 	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 	<script src="js/bootstrap-datepicker.js"></script>

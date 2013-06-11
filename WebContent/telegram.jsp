@@ -30,7 +30,7 @@
 				${telegrambean.town}<BR> Locks: ${telegrambean.locks}<BR>
 				Stocks: ${telegrambean.stocks}<BR> Barrels:
 				${telegrambean.barrels}<BR> 
-				<a href="sucess.jsp"><button class="btn btn-success">Add new sale</button></a>
+				<a href="add_sale.jsp"><button class="btn btn-success">Add new sale</button></a>
 				<a href="<%=request.getContextPath()%>/SalesServlet"><button class="btn btn-info">View sales</button></a>
 			</div>
 		</div>

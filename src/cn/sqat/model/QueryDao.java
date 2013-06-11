@@ -12,7 +12,7 @@ public class QueryDao {
 
 	static Connection currentCon = null;
 	static ResultSet rs = null;
-	
+
 	public static List<SalesPersonBean> querySalesPersons(String query)
 	{
 		List<SalesPersonBean> dataList = new ArrayList<SalesPersonBean>(); 
@@ -39,7 +39,7 @@ public class QueryDao {
 		return dataList;
 	}
 
-	
+
 	public static List<TownBean> queryTowns(String query)
 	{
 		List<TownBean> dataList = new ArrayList<TownBean>(); 
@@ -65,7 +65,7 @@ public class QueryDao {
 		}
 		return dataList;
 	}
-	
+
 	public static List<ItemBean> queryItems(String query)
 	{
 		List<ItemBean> dataList = new ArrayList<ItemBean>(); 
@@ -110,11 +110,11 @@ public class QueryDao {
 				//Add records into data list
 				SaleBean sb = new SaleBean();
 				sb.setId(rs.getInt("id"));
-				
+
 				sb.setSalesperson(rs.getInt("salesperson"));
 				sb.setTown(rs.getString("town.name"));
 				sb.setItem(rs.getString("item.name"));
-				
+
 				sb.setDate(rs.getString("date"));
 				sb.setQuantity(rs.getInt("quantity"));
 				dataList.add(sb);
@@ -127,7 +127,7 @@ public class QueryDao {
 		}
 		return dataList;
 	}
-	
+
 	public static List<ReportBean> queryReports(Object id)
 	{
 		List<ReportBean> dataList = new ArrayList<ReportBean>(); 
@@ -138,7 +138,7 @@ public class QueryDao {
 			stmt=currentCon.createStatement();
 			rs = stmt.executeQuery("SELECT * FROM report,salesperson,user WHERE " +
 					"salesperson='"+id+"' AND " +
-					"salesperson.id=report.salesperson AND salesperson.id=user.id ORDER BY month DESC;");
+					"salesperson.id=report.salesperson AND salesperson.id=user.id AND salary <> 0 ORDER BY month DESC;");
 			while (rs.next()){
 				//Add records into data list
 				ReportBean rb = new ReportBean();
@@ -154,6 +154,35 @@ public class QueryDao {
 			System.out.println("Query failed: An Exception has occurred! " + ex);
 		}
 		return dataList;
+	}
+
+	public static ReportBean submitReport(ReportBean report) {
+		Statement stmt = null;
+		int salesId = report.getId();
+		String month = report.getMonth();
+		System.out.println(month);
+		String insertQuery = "insert into report (salesperson, month, salary) values "+
+				"("+salesId+",'"+month+"',0);";
+
+		//		String searchQuery = "select * from user u where u.name = '"+username+"' AND u.password = '"+password+"'";
+
+		try
+		{
+			//connecting to the DB
+			currentCon = ConnectionManager.getConnection();
+			stmt=currentCon.createStatement();
+			if(!stmt.execute(insertQuery)){
+				System.out.println("Insert completed");
+				System.out.println("Rows updated: "+stmt.getUpdateCount());
+			}else{
+				System.out.println("Insert failed");
+			}
+		}
+		catch (Exception ex)
+		{
+			System.out.println("DB failed: An Exception has occurred! " + ex);
+		}
+		return report;
 	}
 }
 

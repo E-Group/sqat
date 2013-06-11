@@ -23,35 +23,56 @@ public class SalesServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try
 		{
-//			System.out.println("In the Sales Servlet");
 			HttpSession session = request.getSession();
-
+			String query;
+			String redirect;
 			LoginBean user = (LoginBean) session.getAttribute("loginbean");
+			String date = request.getParameter("date");
 			
+			String filter = request.getParameter("filter");
+			System.out.println("filter "+filter);
+
 			if(user.isGunner()){
 				String salesperson = request.getParameter("salespersons");
-				String date = request.getParameter("date");
-				
-				List<SaleBean> list = QueryDao.querySales("SELECT * FROM sale,town,item WHERE " +
-						"salesperson='"+salesperson+"' AND " +
-						"town.id=sale.town AND item.id=sale.item AND date LIKE '"+date+"%' ORDER BY date DESC;");			
-				request.setAttribute("list", list);
+				if(filter != null){
+					query = "SELECT * FROM sale,town,item WHERE " +
+							"salesperson='"+salesperson+"' AND " +
+							"town.id=sale.town AND item.id=sale.item AND date LIKE '"+date+"%' ORDER BY date DESC;";			
+
+					request.setAttribute("selecteddate", date);
+
+				}
+				else {
+					query = "SELECT * FROM sale,town,item WHERE " +
+							"salesperson='"+salesperson+"' AND " +
+							"town.id=sale.town AND item.id=sale.item;";		
+				}
 				request.setAttribute("selectedsales", salesperson);
-				request.setAttribute("selecteddate", date);
-				request.getRequestDispatcher("/gunner.jsp").forward(request, response);
-			}
-			
-			else {
-				List<SaleBean> list = QueryDao.querySales("SELECT * FROM sale,town,item WHERE " +
-						"salesperson='"+session.getAttribute("id")+"' AND " +
-						"town.id=sale.town AND item.id=sale.item ORDER BY date DESC;");			
-				request.setAttribute("list", list);
-				request.getRequestDispatcher("/sales.jsp").forward(request, response);
+				redirect = "/gunner.jsp";
 			}
 
-		} catch (Throwable exc)
+			else {
+				if(filter != null){	
+					query = "SELECT * FROM sale,town,item WHERE " +
+							"salesperson='"+user.getId()+"' AND " +
+							"town.id=sale.town AND item.id=sale.item AND date LIKE '"+date+"%' ORDER BY date DESC;";		
+					request.setAttribute("selecteddate", date);
+				}
+
+				else  {
+					query = "SELECT * FROM sale,town,item WHERE " +
+							"salesperson='"+user.getId()+"' AND " +
+							"town.id=sale.town AND item.id=sale.item ORDER BY date DESC;";
+				}
+				redirect = "/sales.jsp";
+			}
+			List<SaleBean> list = QueryDao.querySales(query);	
+			request.setAttribute("list", list);
+			request.getRequestDispatcher(redirect).forward(request, response);
+
+		} catch (NullPointerException e)
 		{
-			System.out.println(exc);
+			e.printStackTrace();
 		}
 	}
 

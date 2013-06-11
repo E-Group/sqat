@@ -38,6 +38,7 @@ public class LoginDao{
 				
 				stmt = currentCon.createStatement();
 				rs = stmt.executeQuery("select * from user,salesperson,gunsmith where salesperson.id="+bean.getId()+" and gunsmith.id=user.id");
+				
 				if(rs.next()){
 					bean.setGunner(false);
 					bean.setGunsmith(rs.getString("user.name"));
