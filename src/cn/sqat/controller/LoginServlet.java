@@ -41,7 +41,6 @@ public class LoginServlet extends HttpServlet {
 		List<SalesPersonBean> list = QueryDao.querySalesPersons(
 				"SELECT user.name, user.id FROM salesperson JOIN user ON salesperson.id = user.id " +
 				"AND salesperson.gunsmith = "+user.getId()+" GROUP BY user.name;");
-		
 		session.setAttribute("salespersonlist", list);
 	}
 	
@@ -68,11 +67,11 @@ public class LoginServlet extends HttpServlet {
 
 				if(user.isGunner()){
 					initGunner(request, user);
-					request.getRequestDispatcher("/gunner.jsp").forward(request, response);
+					request.getRequestDispatcher("/sales").forward(request, response);
 				}
 				else {
 					initSalesPerson(request);
-					request.getRequestDispatcher("/add_sale.jsp").forward(request, response);
+					request.getRequestDispatcher("/add").forward(request, response);
 				}
 
 			}else{

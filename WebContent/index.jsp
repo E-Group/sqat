@@ -17,7 +17,7 @@
 <body>
 
 	<div class="container">
-		<form class="form-signin" action="LoginServlet">
+		<form class="form-signin" action="login">
 			<h2 class="form-signin-heading">Please sign in</h2>
 			<input type="text" name="email" class="input-block-level"
 				placeholder="Username"> <input type="password" name="pass"

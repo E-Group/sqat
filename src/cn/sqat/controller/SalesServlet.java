@@ -49,7 +49,7 @@ public class SalesServlet extends HttpServlet {
 							"town.id=sale.town AND item.id=sale.item ORDER BY date DESC;";		
 				}
 				request.setAttribute("selectedsales", salesperson);
-				redirect = "/gunner.jsp";
+				redirect = "/WEB-INF/gunner.jsp";
 			}
 
 			else {
@@ -67,7 +67,7 @@ public class SalesServlet extends HttpServlet {
 							"town.id=sale.town AND item.id=sale.item ORDER BY date DESC;";
 					request.setAttribute("filtered","hidden");
 				}
-				redirect = "/sales.jsp";
+				redirect = "/WEB-INF/sales.jsp";
 			}
 			List<SaleBean> list = QueryDao.querySales(query);	
 			request.setAttribute("list", list);

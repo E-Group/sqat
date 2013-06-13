@@ -24,12 +24,20 @@ public class ReportServlet extends HttpServlet {
 		try
 		{
 			HttpSession session = request.getSession();
+			
+			LoginBean user = (LoginBean) session.getAttribute("loginbean");
+			if(user.isGunner()){
+				// TODO: köra den första redirect? byter inte adress i adressfältet?
+				request.getRequestDispatcher("/sales").forward(request, response);
+				return;
+			}
+			
 			request.getAttribute("user");
 			List<ReportBean> list = QueryDao.queryReports(session.getAttribute("id"), true);			
 			request.setAttribute("list", list);
 			List<ReportBean> unconfirmedList = QueryDao.queryReports(session.getAttribute("id"), false);			
 			request.setAttribute("unconfirmedList", unconfirmedList);
-			request.getRequestDispatcher("/salary.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/salary.jsp").forward(request, response);
 
 		} catch (Throwable exc)
 		{
@@ -63,7 +71,7 @@ public class ReportServlet extends HttpServlet {
 			else {
 				request.setAttribute("error", report.getError());
 			}
-			request.getRequestDispatcher("sales.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/sales.jsp").forward(request, response);
 
 		} catch (Exception e)
 		{

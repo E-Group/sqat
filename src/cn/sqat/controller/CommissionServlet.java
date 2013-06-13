@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 import cn.sqat.model.CommissionBean;
 import cn.sqat.model.LoginBean;
 import cn.sqat.model.QueryDao;
-import cn.sqat.model.ReportBean;
 
 
 
@@ -29,11 +28,11 @@ public class CommissionServlet extends HttpServlet {
 			summary += cb.getStocks() * cb.getStocksPrice();
 			summary += cb.getBarrels() * cb.getBarrelsPrice();
 			/*
-			 * 	10% on sales up to (and including) $1000, 
+			 * ï�¯	10% on sales up to (and including) $1000, 
 			 * 	15% on the next $800, 
 			 * 	20% on any sales in excess of $1800. 
 			 * 
-			 * 	Locks cost $45, stocks cost $30, and barrels cost $25. 
+			 * ï�¯	Locks cost $45, stocks cost $30, and barrels cost $25. 
 			 */
 			if(summary <= 1000){
 				commission = (int) (summary * 0.10);
@@ -61,9 +60,16 @@ public class CommissionServlet extends HttpServlet {
 		try
 		{
 
-			// Hämta salesperson id och månad, skapa bean, returnera skiten
+			// HÃ¤mta salesperson id och mÃ¥nad, skapa bean, returnera skiten
 			HttpSession session = request.getSession();
 			LoginBean user = (LoginBean) session.getAttribute("loginbean");
+			
+			if(!user.isGunner()){
+				// TODO: köra den första redirect? byter inte adress i adressfältet?
+				request.getRequestDispatcher("/sales").forward(request, response);
+				return;
+			}
+			
 			List<CommissionBean> temp = QueryDao.queryCommissions(Integer.parseInt(user.getId()));	
 			List<CommissionBean> list = calculateCommissions(temp);
 			session.setAttribute("comlist", list);
@@ -72,7 +78,7 @@ public class CommissionServlet extends HttpServlet {
 				request.setAttribute("message", "No unaccepted reports at the moment!");
 			}
 			
-			request.getRequestDispatcher("/commission.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/commission.jsp").forward(request, response);
 
 		} catch (Throwable exc)
 		{
@@ -111,7 +117,7 @@ public class CommissionServlet extends HttpServlet {
 			if(list.isEmpty()){
 				request.setAttribute("message", "No unaccepted reports at the moment!");
 			}
-			request.getRequestDispatcher("/commission.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/commission.jsp").forward(request, response);
 		} catch (Exception e)
 		{
 			e.printStackTrace();

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import cn.sqat.model.LoginBean;
 import cn.sqat.model.TelegramBean;
 import cn.sqat.model.TelegramDao;
 
@@ -62,11 +63,19 @@ public class TelegramServlet extends HttpServlet {
 		try
 		{
 			System.out.println("In the Telegram Servlet");
-			HttpSession userSession = request.getSession();
+			HttpSession session = request.getSession();
+			
+			LoginBean user = (LoginBean) session.getAttribute("loginbean");
+			if(user.isGunner()){
+				// TODO: köra den första redirect? byter inte adress i adressfältet?
+				request.getRequestDispatcher("/sales").forward(request, response);
+				return;
+			}
+			
 			String error = validate(request);
 			if(error.isEmpty()){
 				TelegramBean tele = new TelegramBean();
-				tele.setId((String)userSession.getAttribute("id"));
+				tele.setId((String)session.getAttribute("id"));
 				tele.setTown(request.getParameter("town"));
 				tele.setLocks(request.getParameter("locks"));
 				tele.setStocks(request.getParameter("stocks"));
@@ -79,14 +88,14 @@ public class TelegramServlet extends HttpServlet {
 					tele = TelegramDao.submit(tele);
 				}catch(IllegalStateException e){
 					request.setAttribute("message", "<b>Specified month is already reported!</b>");
-					request.getRequestDispatcher("/add_sale.jsp").forward(request, response);
+					request.getRequestDispatcher("/WEB-INF/add_sale.jsp").forward(request, response);
 				}
 				request.setAttribute("telegrambean", tele);
-				request.getRequestDispatcher("/telegram.jsp").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/telegram.jsp").forward(request, response);
 			}
 			else {
 				request.setAttribute("message", error);
-				request.getRequestDispatcher("/add_sale.jsp").forward(request, response);
+				request.getRequestDispatcher("/add").forward(request, response);
 			}
 
 		} catch (Throwable exc)

@@ -26,7 +26,7 @@ public class TelegramDao {
 			if (reportExists){
 				throw new IllegalStateException();
 			}
-
+			
 
 		} catch (SQLException e) {
 			System.out.println("DB failed: An Exception has occurred! " + e);
