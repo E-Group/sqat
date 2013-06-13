@@ -25,8 +25,10 @@ public class ReportServlet extends HttpServlet {
 		{
 			HttpSession session = request.getSession();
 			request.getAttribute("user");
-			List<ReportBean> list = QueryDao.queryReports(session.getAttribute("id"));			
+			List<ReportBean> list = QueryDao.queryReports(session.getAttribute("id"), true);			
 			request.setAttribute("list", list);
+			List<ReportBean> unconfirmedList = QueryDao.queryReports(session.getAttribute("id"), false);			
+			request.setAttribute("unconfirmedList", unconfirmedList);
 			request.getRequestDispatcher("/salary.jsp").forward(request, response);
 
 		} catch (Throwable exc)
@@ -52,10 +54,11 @@ public class ReportServlet extends HttpServlet {
 			report.setSalesperson(user.getUsername());
 			report.setMonth(fullDate);
 			report.setId(Integer.parseInt(user.getId()));
+			
 			report = QueryDao.submitReport(report);
 			
 			if(report.getError().isEmpty()){
-			request.setAttribute("message", date+" reported.");
+				request.setAttribute("message", date+" reported.");
 			}
 			else {
 				request.setAttribute("error", report.getError());

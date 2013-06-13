@@ -2,7 +2,6 @@ package cn.sqat.model;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -132,7 +131,14 @@ public class QueryDao {
 		return dataList;
 	}
 
-	public static List<ReportBean> queryReports(Object id)
+	/**
+	 * Function that returns a list of beans from the report table
+	 * @param id - The id of the user
+	 * @param confirmed - True if the list should contain only the confirmed records,
+	 * false if the list should contain only the unconfirmed values
+	 * @return A list of report beans
+	 */
+	public static List<ReportBean> queryReports(Object id, boolean confirmed)
 	{
 		List<ReportBean> dataList = new ArrayList<ReportBean>(); 
 		Statement stmt = null;
@@ -140,10 +146,16 @@ public class QueryDao {
 		{
 			currentCon = ConnectionManager.getConnection();
 			stmt=currentCon.createStatement();
-			rs = stmt.executeQuery("SELECT * FROM report,salesperson,user WHERE " +
-					"salesperson='"+id+"' AND " +
-					"salesperson.id=report.salesperson AND salesperson.id=user.id AND salary IS NOT NULL ORDER BY month DESC;");
 
+			if(confirmed){
+				rs = stmt.executeQuery("SELECT * FROM report,salesperson,user WHERE " +
+						"salesperson='"+id+"' AND " +
+						"salesperson.id=report.salesperson AND salesperson.id=user.id AND salary IS NOT NULL ORDER BY month DESC;");
+			}else{
+				rs = stmt.executeQuery("SELECT * FROM report,salesperson,user WHERE " +
+						"salesperson='"+id+"' AND " +
+						"salesperson.id=report.salesperson AND salesperson.id=user.id AND salary IS NULL ORDER BY month DESC;");
+			}
 			while (rs.next()){
 				//Add records into data list
 				ReportBean rb = new ReportBean();
@@ -221,10 +233,14 @@ public class QueryDao {
 	}
 
 	public static ReportBean submitReport(ReportBean report) {
+		if(report.getMonth().equals("-01")){
+			report.setError("Please select a month.");
+			return report;
+		}
+		
 		Statement stmt = null;
 		int salesId = report.getId();
 		String month = report.getMonth();
-		System.out.println(month);
 		String insertQuery = "insert into report (salesperson, month) values "+
 				"("+salesId+",'"+month+"');";
 		String query = "SELECT * FROM sale WHERE date LIKE '"+report.getMonth().substring(0, 7)+"%' AND" +
@@ -245,8 +261,7 @@ public class QueryDao {
 				}else{
 					System.out.println("Insert failed");
 				}
-			}
-			else{
+			}else{
 				report.setError("You have no sales to report, please select another month.");
 			}
 		}

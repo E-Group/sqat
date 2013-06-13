@@ -92,3 +92,8 @@ html,body {
 	}
 }
 
+.report {
+	float: right;
+	margin-top: -60px;
+}
+
