@@ -31,7 +31,8 @@ public class SalesServlet extends HttpServlet {
 			String date = request.getParameter("date");
 			
 			String filter = request.getParameter("filter");
-
+			System.out.println(filter);
+			
 			if(user.isGunner()){
 				String salesperson = request.getParameter("salespersons");
 				if(filter != null){
@@ -45,7 +46,7 @@ public class SalesServlet extends HttpServlet {
 				else {
 					query = "SELECT * FROM sale,town,item WHERE " +
 							"salesperson='"+salesperson+"' AND " +
-							"town.id=sale.town AND item.id=sale.item;";		
+							"town.id=sale.town AND item.id=sale.item ORDER BY date DESC;";		
 				}
 				request.setAttribute("selectedsales", salesperson);
 				redirect = "/gunner.jsp";

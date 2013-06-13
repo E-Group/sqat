@@ -51,4 +51,13 @@
 		<servlet-name>ReportServlet</servlet-name>
 		<url-pattern>/ReportServlet</url-pattern>
 	</servlet-mapping>
+			<servlet>
+		<display-name>CommissionServlet</display-name>
+		<servlet-name>CommissionServlet</servlet-name>
+		<servlet-class>cn.sqat.controller.CommissionServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CommissionServlet</servlet-name>
+		<url-pattern>/CommissionServlet</url-pattern>
+	</servlet-mapping>
 </web-app>

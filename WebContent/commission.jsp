@@ -30,6 +30,42 @@
 	<div class="container">
 		<div class="form form-table">
 			<h2 class="form-heading">Commission</h2>
+			<table class="table table-striped table-bordered">
+				<h4>Monthly reports from your salesmen</h4>
+				<thead>
+					<tr>
+						<th>Salesperson</th>
+						<th>Town</th>
+						<th>Month</th>
+						<th>Locks</th>
+						<th>Stocks</th>
+						<th>Barrels</th>
+						<th>Salary</th>
+						<th style="border-left: 0px"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${comlist}" var="element">
+						<tr>
+
+							<td>${element.name}</td>
+							<td>${element.town}</td>
+							<td>${element.month}</td>
+							<td>${element.locks}</td>
+							<td>${element.stocks}</td>
+							<td>${element.barrels}</td>
+							<td>$ ${element.salary}</td>
+							<td style="border-left: 0px">
+								<form action="CommissionServlet" method="post">
+									<button name="acceptbtn" class="btn btn-success" type="submit" value="${element.comId}">Accept</button>
+								</form>
+							</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+			<p class="text-info">${message}</p>
+			<c:remove var="message" scope="session" />
 		</div>
 	</div>
 

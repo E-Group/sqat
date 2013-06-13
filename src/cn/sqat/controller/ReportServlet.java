@@ -60,7 +60,7 @@ public class ReportServlet extends HttpServlet {
 			else {
 				request.setAttribute("error", report.getError());
 			}
-			request.getRequestDispatcher("/sales.jsp").forward(request, response);
+			request.getRequestDispatcher("sales.jsp").forward(request, response);
 
 		} catch (Exception e)
 		{

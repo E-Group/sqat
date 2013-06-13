@@ -143,6 +143,7 @@ public class QueryDao {
 			rs = stmt.executeQuery("SELECT * FROM report,salesperson,user WHERE " +
 					"salesperson='"+id+"' AND " +
 					"salesperson.id=report.salesperson AND salesperson.id=user.id AND salary IS NOT NULL ORDER BY month DESC;");
+
 			while (rs.next()){
 				//Add records into data list
 				ReportBean rb = new ReportBean();
@@ -157,6 +158,65 @@ public class QueryDao {
 		{
 			System.out.println("Query failed: An Exception has occurred! " + ex);
 		}
+		return dataList;
+	}
+
+	public static List<CommissionBean> queryCommissions(int id)
+	{
+		List<CommissionBean> dataList = new ArrayList<CommissionBean>(); 
+		Statement stmt = null;
+		try
+		{
+			currentCon = ConnectionManager.getConnection();
+			stmt=currentCon.createStatement();
+			rs = stmt.executeQuery("SELECT * FROM salesperson JOIN user JOIN report JOIN sale JOIN item ON salesperson.id = user.id AND user.id = report.salesperson AND report.salesperson = sale.salesperson AND sale.item = item.id WHERE salesperson.gunsmith = 1 AND MONTH(report.month) = MONTH(sale.date) AND YEAR(report.month) = YEAR(sale.date) AND salary IS NULL Group by date, item.id Order by user.id, date;");
+
+
+			String tempMonth = "";
+			int	tempId = 0;
+			CommissionBean cb = null;
+			int comId = 1;
+			while (rs.next()){
+
+				if(!tempMonth.equals(rs.getString("month")) || tempId != rs.getInt("id")){
+					cb = new CommissionBean();
+					cb.setComId(comId);
+					comId++;
+					cb.setId(rs.getInt("salesperson.id"));
+					cb.setName(rs.getString("user.name"));
+					cb.setGunsmith(id);
+					cb.setSalary(rs.getInt("salary")); // KOMMER VARA NULL;
+					cb.setMonth(rs.getString("month"));
+					cb.setTown(rs.getInt("town"));
+					tempId = cb.getId();
+					tempMonth= cb.getMonth();
+					dataList.add(cb);
+				}
+				int itemId = rs.getInt("item.id");
+
+				switch(itemId){
+				case 1: cb.setLocks(cb.getLocks()+rs.getInt("quantity"));
+				cb.setLocksPrice(rs.getInt("price"));
+				System.out.println(cb.getLocks()+" Lock");
+				break;
+				case 2: cb.setStocks(cb.getStocks()+rs.getInt("quantity"));
+				cb.setStocksPrice(rs.getInt("price"));
+				System.out.println(cb.getStocks()+" Stock");
+				break;
+				case 3: cb.setBarrels(cb.getBarrels()+rs.getInt("quantity"));
+				cb.setBarrelsPrice(rs.getInt("price"));
+				System.out.println(cb.getBarrels() +" Barrels");
+				break;
+
+				}
+				System.out.println(cb.getMonth());
+			}
+		}
+		catch (Exception ex)
+		{
+			System.out.println("Query failed: An Exception has occurred! " + ex);
+		}
+		System.out.println("Done with SQL");
 		return dataList;
 	}
 
@@ -200,6 +260,38 @@ public class QueryDao {
 			}
 		}
 		return report;
+	}
+
+	public static CommissionBean submitCommission(CommissionBean comm) {
+		Statement stmt = null;
+		int salesId = comm.getId();
+		String month = comm.getMonth();
+		int salary = comm.getSalary();
+
+		String update = "update report SET salary = "+salary+" WHERE " +
+				"salesperson="+salesId+" AND month ='"+month+"';";
+
+		try
+		{
+			currentCon = ConnectionManager.getConnection();
+			stmt = currentCon.createStatement();
+			boolean saleExist = stmt.execute(update);
+
+			if(saleExist){
+				System.out.println("Insert completed");
+				System.out.println("Rows updated: "+stmt.getUpdateCount());
+
+			}
+			else{
+				System.out.println("Insert failed");
+				//				report.setError("Something wrong in DB");
+			}
+		}
+		catch (Exception ex)
+		{
+			System.out.println("DB failed: An Exception has occurred! " + ex);
+		}
+		return comm;
 	}
 }
 
