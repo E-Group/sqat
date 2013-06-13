@@ -6,13 +6,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<script>
-	if ('${loginbean.isValid()}') {
-	} else {
+
+<script type="text/javascript">
+	if ('${loginbean.isValid()}')
+	{
+	}else
+	{		
 		window.location = "/Commission/index.jsp";
 	}
 </script>
-
 
 <jsp:include page="nav_gunner.jsp" />
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -28,23 +30,9 @@
 	<div class="container">
 		<div class="form form-table">
 			<h2 class="form-heading">Sales</h2>
-			<div style="max-width: 400px;">
-				<%-- 				<form action="SalesServlet">
-					<div class="input-append date" id="datepicker" data-date="2013-06">
-						<input name="date" class="span1" size="16" type="text"
-							value="${selecteddate}" readonly> <span class="add-on"><i
-							class="icon-calendar"></i></span>
-					</div>
-					<select class="sale-dropdown" name="salespersons">
-						<c:forEach items="${salespersonlist}" var="element">
-							<option value="${element.id}"
-								${element.id == selectedsales ? 'selected="selected"' : ''}>${element.name}</option>
-						</c:forEach>
-					</select>
-					<button class="btn btn-info" type="submit"">View sales</button>
-				</form> --%>
+			<div>Salesperson:
 				<form action="SalesServlet">
-					<span><i> <select class="sale-dropdown"
+					<span><i><select class="sale-dropdown"
 							name="salespersons">
 								<c:forEach items="${salespersonlist}" var="element">
 									<option value="${element.id}"

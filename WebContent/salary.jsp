@@ -6,9 +6,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<script>
-	if ('${loginbean.isValid()}') {
-	} else {
+
+<script type="text/javascript">
+	if ('${loginbean.isValid()}')
+	{
+	}else
+	{		
 		window.location = "/Commission/index.jsp";
 	}
 </script>
@@ -25,20 +28,35 @@
 
 	<div class="container">
 		<div class="form form-table">
-			<h2 class="form-heading">Sales</h2>
+			<h2 class="form-heading">Salary</h2>
+			<table class="table table-striped table-bordered">
+				<caption>Unconfirmed reported months</caption>
+				<thead>
+					<tr>
+						<th>Month</th>
+						<th>Salary</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${unconfirmedList}" var="unconfirmedElement">
+						<tr>
+							<td>${unconfirmedElement.month}</td>
+							<td>${unconfirmedElement.salary}</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
 			<table class="table table-striped table-bordered">
 				<caption>Your salaries</caption>
 				<thead>
 					<tr>
-						<th>salesperson</th>
-						<th>month</th>
-						<th>salary</th>
+						<th>Month</th>
+						<th>Salary</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach items="${list}" var="element">
 						<tr>
-							<td>${element.salesperson}</td>
 							<td>${element.month}</td>
 							<td>${element.salary}</td>
 						</tr>

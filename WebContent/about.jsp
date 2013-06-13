@@ -4,9 +4,11 @@
 <html>
 <head>
 
-<script>
-	if ('${loginbean.isValid()}') {
-	} else {
+<script type="text/javascript">
+	if ('${loginbean.isValid()}')
+	{
+	}else
+	{		
 		window.location = "/Commission/index.jsp";
 	}
 </script>
