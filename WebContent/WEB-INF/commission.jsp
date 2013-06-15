@@ -37,7 +37,6 @@
 				<thead>
 					<tr>
 						<th>Salesperson</th>
-						<th>Town</th>
 						<th>Month</th>
 						<th>Locks</th>
 						<th>Stocks</th>
@@ -51,7 +50,6 @@
 						<tr>
 
 							<td>${element.name}</td>
-							<td>${element.town}</td>
 							<td>${element.month}</td>
 							<td>${element.locks}</td>
 							<td>${element.stocks}</td>

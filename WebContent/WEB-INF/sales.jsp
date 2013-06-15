@@ -84,7 +84,7 @@
 	</div>
 	<jsp:include page="footer.jsp" />
 	<!-- JS -->
-	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script src="js/jquery-1.9.1.min.js"></script>
 	<script src="js/bootstrap-datepicker.js"></script>
 	<script>
 		$("#datepicker").datepicker({

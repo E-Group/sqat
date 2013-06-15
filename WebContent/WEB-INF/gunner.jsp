@@ -56,11 +56,11 @@
 				<h4>Sales for period ${selecteddate}</h4>
 				<thead>
 					<tr>
-						<th>id</th>
-						<th>town</th>
-						<th>item</th>
-						<th>date</th>
-						<th>quantity</th>
+						<th>Id</th>
+						<th>Town</th>
+						<th>Item</th>
+						<th>Date</th>
+						<th>Quantity</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -79,7 +79,7 @@
 	</div>
 	<jsp:include page="footer.jsp" />
 	<!-- JS -->
-	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script src="js/jquery-1.9.1.min.js"></script>
 	<script src="js/bootstrap-datepicker.js"></script>
 	<script>
 		$("#datepicker").datepicker({
