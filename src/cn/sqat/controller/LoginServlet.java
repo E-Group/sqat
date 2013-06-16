@@ -29,7 +29,6 @@ public class LoginServlet extends HttpServlet {
 		// TODO Auto-generated constructor stub
 	}
 	
-	
 	public void initSalesPerson(HttpServletRequest request){
 		HttpSession session = request.getSession();
 		List<TownBean> list = QueryDao.queryTowns("SELECT * FROM town;");  

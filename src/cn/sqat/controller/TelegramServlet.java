@@ -15,13 +15,13 @@ import cn.sqat.model.TelegramDao;
 public class TelegramServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private StringBuilder sb;
-	private static final String ERROR_LOCKS = "Sold locks should be a number between 1 and 70.<br> ";
-	private static final String ERROR_STOCKS = "Sold stocks should be a number between 1 and 80.<br>";
-	private static final String ERROR_BARRELS = "Sold barrels should be a number between 1 and 90.<br>";
+	private static final String ERROR_LOCKS = "Sold locks should be an integer larger than 0.<br>";
+	private static final String ERROR_STOCKS = "Sold stocks should be an integer larger than 0.<br>";
+	private static final String ERROR_BARRELS = "Sold barrels should be an integer larger than 0.<br>";
 	
-	private void checkInput(String str, int lower, int upper) {
+	private void checkInput(String str, int lower) {
 			int value = Integer.parseInt(str);
-			if(value < lower || value > upper){
+			if(value < lower){
 				throw new NumberFormatException();
 			}
 	}
@@ -36,19 +36,19 @@ public class TelegramServlet extends HttpServlet {
 		
 		try{
 			System.out.println("Locks value: " +locks);
-		checkInput(locks,1,70);
+		checkInput(locks,1);
 		} catch(NumberFormatException e){
 			sb.append(ERROR_LOCKS);
 		}
 		
 		try{
-		checkInput(stocks,1,80);
+		checkInput(stocks,1);
 		} catch(NumberFormatException e){
 			sb.append(ERROR_STOCKS);
 		}
 		
 		try{
-		checkInput(barrels,1,90);
+		checkInput(barrels,1);
 		} catch(NumberFormatException e){
 			sb.append(ERROR_BARRELS);
 		}
@@ -67,7 +67,7 @@ public class TelegramServlet extends HttpServlet {
 			
 			LoginBean user = (LoginBean) session.getAttribute("loginbean");
 			if(user.isGunner()){
-				// TODO: köra den första redirect? byter inte adress i adressfältet?
+				// TODO: kï¿½ra den fï¿½rsta redirect? byter inte adress i adressfï¿½ltet?
 				request.getRequestDispatcher("/sales").forward(request, response);
 				return;
 			}
@@ -87,7 +87,7 @@ public class TelegramServlet extends HttpServlet {
 				try {
 					tele = TelegramDao.submit(tele);
 				}catch(IllegalStateException e){
-					request.setAttribute("message", "<b>Specified month is already reported!</b>");
+					request.setAttribute("message", e.getMessage()+"<b>Telegram NOT sent!");
 					request.getRequestDispatcher("/WEB-INF/add_sale.jsp").forward(request, response);
 				}
 				request.setAttribute("telegrambean", tele);
