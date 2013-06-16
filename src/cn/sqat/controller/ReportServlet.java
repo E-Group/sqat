@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import cn.sqat.model.LoginBean;
 import cn.sqat.model.QueryDao;
 import cn.sqat.model.ReportBean;
+import cn.sqat.model.TelegramDao;
 
 public class ReportServlet extends HttpServlet {
 
@@ -24,14 +25,14 @@ public class ReportServlet extends HttpServlet {
 		try
 		{
 			HttpSession session = request.getSession();
-			
+
 			LoginBean user = (LoginBean) session.getAttribute("loginbean");
 			if(user.isGunner()){
-				// TODO: köra den första redirect? byter inte adress i adressfältet?
+				// TODO: kï¿½ra den fï¿½rsta redirect? byter inte adress i adressfï¿½ltet?
 				request.getRequestDispatcher("/sales").forward(request, response);
 				return;
 			}
-			
+
 			request.getAttribute("user");
 			List<ReportBean> list = QueryDao.queryReports(session.getAttribute("id"), true);			
 			request.setAttribute("list", list);
@@ -62,14 +63,16 @@ public class ReportServlet extends HttpServlet {
 			report.setSalesperson(user.getUsername());
 			report.setMonth(fullDate);
 			report.setId(Integer.parseInt(user.getId()));
-			
-			report = QueryDao.submitReport(report);
-			
-			if(report.getError().isEmpty()){
-				request.setAttribute("message", date+" reported.");
+			boolean completed = true;
+
+			try {
+				report = QueryDao.submitReport(report);
+			}catch(IllegalStateException e){
+				completed = false;
+				request.setAttribute("error", e.getMessage());
 			}
-			else {
-				request.setAttribute("error", report.getError());
+			if(completed){
+				request.setAttribute("message", date+" reported.");
 			}
 			request.getRequestDispatcher("/WEB-INF/sales.jsp").forward(request, response);
 

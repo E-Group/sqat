@@ -15,9 +15,9 @@ import cn.sqat.model.TelegramDao;
 public class TelegramServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private StringBuilder sb;
-	private static final String ERROR_LOCKS = "Sold locks should be an integer larger than 0.<br>";
-	private static final String ERROR_STOCKS = "Sold stocks should be an integer larger than 0.<br>";
-	private static final String ERROR_BARRELS = "Sold barrels should be an integer larger than 0.<br>";
+	private static final String ERROR_LOCKS = "Sold locks should be a positive integer.<br>";
+	private static final String ERROR_STOCKS = "Sold stocks should be a positive integer.<br>";
+	private static final String ERROR_BARRELS = "Sold barrels should be a positive integer.<br>";
 	
 	private void checkInput(String str, int lower) {
 			int value = Integer.parseInt(str);
@@ -36,19 +36,19 @@ public class TelegramServlet extends HttpServlet {
 		
 		try{
 			System.out.println("Locks value: " +locks);
-		checkInput(locks,1);
+		checkInput(locks,0);
 		} catch(NumberFormatException e){
 			sb.append(ERROR_LOCKS);
 		}
 		
 		try{
-		checkInput(stocks,1);
+		checkInput(stocks,0);
 		} catch(NumberFormatException e){
 			sb.append(ERROR_STOCKS);
 		}
 		
 		try{
-		checkInput(barrels,1);
+		checkInput(barrels,0);
 		} catch(NumberFormatException e){
 			sb.append(ERROR_BARRELS);
 		}

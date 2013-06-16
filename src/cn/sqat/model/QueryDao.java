@@ -2,6 +2,7 @@ package cn.sqat.model;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -237,7 +238,7 @@ public class QueryDao {
 			report.setError("Please select a month.");
 			return report;
 		}
-		
+
 		Statement stmt = null;
 		int salesId = report.getId();
 		String month = report.getMonth();
@@ -245,6 +246,9 @@ public class QueryDao {
 				"("+salesId+",'"+month+"');";
 		String query = "SELECT * FROM sale WHERE date LIKE '"+report.getMonth().substring(0, 7)+"%' AND" +
 				" salesperson = "+report.getId()+";";
+		boolean l = false;
+		boolean s = false; 
+		boolean b = false;
 
 		try
 		{
@@ -252,25 +256,46 @@ public class QueryDao {
 			stmt = currentCon.createStatement();
 
 			rs = stmt.executeQuery(query);
-			boolean saleExist = rs.next();
 
-			if(saleExist){
+			while(rs.next()){
+				switch (rs.getInt("item")) {
+				case 1: l = true;
+				break;
+				case 2: s = true;
+				break;
+				case 3: b = true;
+				break;
+				}
+			}
+			StringBuilder str = new StringBuilder();
+			
+			if(l && s && b){
 				if(!stmt.execute(insertQuery)){
 					System.out.println("Insert completed");
 					System.out.println("Rows updated: "+stmt.getUpdateCount());
 				}else{
 					System.out.println("Insert failed");
+					throw new IllegalStateException("Report failed.");
 				}
 			}else{
-				report.setError("You have no sales to report, please select another month.");
+				if(!l){
+					str.append("You have not sold any locks this month. <br>");
+				}
+				if(!s){
+					str.append("You have not sold any stocks this month. <br>");
+				}
+				if(!b){
+					str.append("You have not sold any barrels this month. <br>");
+				}
+				throw new IllegalStateException(str.toString());
 			}
 		}
-		catch (Exception ex)
+		catch (SQLException ex)
 		{
 			System.out.println("DB failed: An Exception has occurred! " + ex);
 			report.setError("Error in Database, please try again.");
 			if(ex instanceof MySQLIntegrityConstraintViolationException){
-				report.setError("A sales report already exist for "+report.getMonth().substring(0, 7)+", please" +
+				throw new IllegalStateException("A sales report already exist for "+report.getMonth().substring(0, 7)+", please" +
 						" select another month.");
 			}
 		}

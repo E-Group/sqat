@@ -85,24 +85,31 @@ public class TelegramDao {
 		int stocks = bean.getStocks();
 		int barrels = bean.getBarrels();
 		String date = bean.getDate();
-
-		String insertQuery = "insert into sale (salesperson, town, item, date, quantity) values "+
-				"("+id+","+town+",1,'"+date+"',"+locks+"),"+
-				"("+id+","+town+",2,'"+date+"',"+stocks+"),"+
-				"("+id+","+town+",3,'"+date+"',"+barrels+");";
-
+		
 		try{
-			stmt=currentCon.createStatement();
-			if(!stmt.execute(insertQuery)){
-				System.out.println("Insert completed");
-				System.out.println("Rows updated: "+stmt.getUpdateCount());
-			}else{
-				System.out.println("Insert failed");
-			}
-
+		currentCon.setAutoCommit(false);
+		 
+		if(locks > 0){
+			stmt.addBatch("insert into sale (salesperson, town, item, date, quantity) values "+
+					"("+id+","+town+",1,'"+date+"',"+locks+");");
+		}
+		if(stocks > 0){
+			stmt.addBatch("insert into sale (salesperson, town, item, date, quantity) values "+
+					"("+id+","+town+",2,'"+date+"',"+stocks+");");
+		}
+		if(barrels > 0) {
+			stmt.addBatch("insert into sale (salesperson, town, item, date, quantity) values "+
+					"("+id+","+town+",3,'"+date+"',"+barrels+");");
+		}
+		if(locks == 0 && stocks == 0 && barrels == 0){
+			throw new IllegalStateException("You cannot send an empty telegram!<br>");
+		}
+			stmt.executeBatch();
+			currentCon.commit();
 		}
 		catch (Exception ex){
 			System.out.println("DB failed: An Exception has occurred! " + ex);
+			throw new IllegalStateException("Telegram failed.<br>");
 		}
 		return bean;
 	}
