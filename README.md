@@ -1,42 +1,38 @@
-  ____                          _         _             
- / ___|___  _ __ ___  _ __ ___ (_)___ ___(_) ___  _ __  
-| |   / _ \| '_ ` _ \| '_ ` _ \| / __/ __| |/ _ \| '_ \ 
-| |__| (_) | | | | | | | | | | | \__ \__ \ | (_) | | | |
- \____\___/|_| |_| |_|_| |_| |_|_|___/___/_|\___/|_| |_|
- 				          									Version 1.0 19/06/2013
-===================================================================================
+Commission
+==========
 
 ## System introcution
 
 # What it is?
 
-Commission is a web application that provides a system that handles producers and salespersons. The producers has items that can be sold by his salespersons. The salespersons enter sales into the system and send a report when he has entered all the sales of a month. The producer can then confirm his salespersons report and calculate his commission for the month.
+Commission is a browser/server application that provides a system that manage producers, who provides items, and salespersons, who sells the items. One producer has many salespersons that sells only his items. The salespersons enter his sales into the system and send a report of a month when all sales for that month is entered. The producer can then confirm the report from the salesperson and approve his calculated commission for the month. Both user types can view their history of data related to themselves.
 
-This program is developed as a project in the Software Testing and Quality Assurance course given at Harbin Institute of Technology 2013 by Liu Shu.
+# Context
 
-/*
-Stocksify is a desktop application for displaying current stock information. It provides a simple user interface for the stocks financial data and graphs. Stocksify also provides recommendations on if the stock is good to buy or not.This program is developed as a project in the Software Reuse Technology course given at Harbin Institute of Technology 2013 by Dr. Shiping Chen.
-*/
+This program is developed as a lab in the Software Testing and Quality Assurance course given at Harbin Institute of Technology 2013 by Liu Shu.
+
+The producer is specified as a gunsmith who has the item locks, stocks and barrels who costs 45, 30, 25 respectivly. The gunsmith has multiple salespersons who sells his items in different towns in his area. The salespersons gets their salary based on the sum of sold items during a month.
 
 # How to use Commission
 
-/*
-## How to query for stock information
-1. Open "Stocksify.jar" in your Stocksify directory
-2. Locate the field labeled "Stock Symbol:" in the top right corner.
-3. Enter the short symbol for a stock, e.g. "AAPL" for Apple.
-4. Enter what range you want the chart to display in the "Range" drop-down.
-5. Choose chart type in the "Chart type" drop-down.
-6. Press the "Search Button"
+- As a salesperson:
+* Log in with your username and password
+* In the 'Add sale' tab you can enter a sale
+	* A sale can consist of at least one item and max 70 locks, 80 stocks and 90 barrels.
+	* Change date of the sale by pressing the calendar icon
+	* Submit your sale by pressing the 'Add sale' button
+* In the 'Sales' tab you can see the history of all sales made by you
+	* To view a specified month, select a month in the calendar field and press 'Filter month'
+		* When a month is filtered you can report that month to your gunsmith by pressing 'Send Report'
+			* The report is then send to the gunsmith for confirmation of the sales and calculation of your commission
+			* Note that no sales can not be added to a month ones a report is sent
+			* A month with no sales can not be reported
+		* To remove the filter, press 'Show All'
+* In the 'Salary' tab you can view your confirmed (with salary) and unconfirmed reports
+* Log out by pressing the 'Log out' button
 
-## Add a Favorite stock
-1. Query a stock (described above)
-2. Press the green '+' symbol in the bottom right corner.
-
-## Remove a Favorite stock
-1. Select a stock in the Favorite list on the right.
-2. Press the red '-' symbol in the bottom right corner.
-*/
+- As a gunsmith:
+// TODO
 
 ## Installation guide
 
@@ -112,7 +108,7 @@ The developers takes no responsibility or liability in the possible case of dama
 */
 
 
-
+---------------
 Hand-ins
 ---------------
 System introduction
