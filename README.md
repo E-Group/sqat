@@ -3,10 +3,13 @@
 | |   / _ \| '_ ` _ \| '_ ` _ \| / __/ __| |/ _ \| '_ \ 
 | |__| (_) | | | | | | | | | | | \__ \__ \ | (_) | | | |
  \____\___/|_| |_| |_|_| |_| |_|_|___/___/_|\___/|_| |_|
- 				          									Version 1.0 16/06/2013
+ 				          									Version 1.0 19/06/2013
+===================================================================================
 
-What it is?
------------
+## System introcution
+
+# What it is?
+
 Commission is a web application that provides a system that handles producers and salespersons. The producers has items that can be sold by his salespersons. The salespersons enter sales into the system and send a report when he has entered all the sales of a month. The producer can then confirm his salespersons report and calculate his commission for the month.
 
 This program is developed as a project in the Software Testing and Quality Assurance course given at Harbin Institute of Technology 2013 by Liu Shu.
@@ -15,37 +18,7 @@ This program is developed as a project in the Software Testing and Quality Assur
 Stocksify is a desktop application for displaying current stock information. It provides a simple user interface for the stocks financial data and graphs. Stocksify also provides recommendations on if the stock is good to buy or not.This program is developed as a project in the Software Reuse Technology course given at Harbin Institute of Technology 2013 by Dr. Shiping Chen.
 */
 
-Installation
-------------
-The program requires:
-	- At least Java 1.7
-	- At least MySQL 5.5.20
-	- At least Apache Tomcat 7.0
-The program is developed with the specified version numbers of services, lower version numbers is not tested and not official supported.
-
-The setup guide below is to be executed in a Windows enviroment.
-
-Java setup: ?
-
-MySQL setup:
-	- Install MySQL (!?)
-	- Create a new database named 'commission'
-	- Add user 'commission', password 'commission' with full privelegies to the database
-	- Run the attached commission.sql file
-	- Default users are found in the table 'user', these can be modified manually via MySQL
-
-Apache Tomcat setup:
-	- Download Apache Tomcat at http://tomcat.apache.org/
-	- Unpack the package at a location of your choice
-	- Move the Commission.war file into the folder "<tomcat location>/webapps/"
-	- Start the Tomcat server by enter "<tomcat location>/bin/startup.bat" in the command line
-	- Tomcat commands can be found at ?
-
-To start the program, simply enter "http://localhost:8080/Commission/" in your browser.
-
-How to use Commission
---------------------
-
+# How to use Commission
 
 /*
 ## How to query for stock information
@@ -65,9 +38,36 @@ How to use Commission
 2. Press the red '-' symbol in the bottom right corner.
 */
 
-Dependencies
-------------
+## Installation guide
 
+The program requires:
+	- At least Java 1.7
+	- At least Apache Tomcat 7.0
+	- At least MySQL 5.5.20
+The program is developed with the specified version numbers of services, lower version numbers is not tested and not official supported.
+
+The setup guide below is to be executed in a Windows enviroment.
+
+Java setup:
+	- Download and install Java from http://java.com/
+
+Apache Tomcat setup:
+	- Download Apache Tomcat at http://tomcat.apache.org/
+	- Unpack the package at a location of your choice
+	- Move the Commission.war file into the folder "<tomcat location>/webapps/"
+	- Start the Tomcat server by running "<tomcat location>/bin/startup.bat"
+	- Tomcat commands can be found at ?
+
+MySQL setup:
+	- Download and install MySQL form http://www.mysql.com/
+	- Create a new database
+	- Run the attached commission.sql file in the database
+	- Make sure the database settings are the same as the settings in "<tomcat location>/webapps/Commission/WEB-INF/classes/config.properties". If you want to change the settings in the file, you need to restart the Tomcat server for the changes to take place. Also make sure that the database user has the right privilegies in the database.
+	- Default users are found in the table 'user', these can be modified manually via MySQL
+
+To start the program, simply enter "http://localhost:8080/Commission/" in your browser.
+
+# Dependencies
 
 /*
 Stocksify uses the Yahoo! Query Language (YQL) to query for stock information and is totally dependent of Yahoo's web service and the YQL to provide information. The application is also dependent on the fact that the user has an Internet connection in order to be able to connect to Yahoo's web services.
@@ -110,3 +110,11 @@ Disclaimer
 The development team behind Stocksify takes no responsibility that the information provided is correct or that the recommendation to buy a stock will be a profitable affair.
 The developers takes no responsibility or liability in the possible case of damage or loss of property from using this application.
 */
+
+
+
+Hand-ins
+---------------
+System introduction
+Installation guide
+Report on other sytem, evaluate the two above
