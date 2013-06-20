@@ -10,7 +10,7 @@ Commission is a browser/server application that provides a system that manage pr
 
 This program is developed as a lab in the Software Testing and Quality Assurance course given at Harbin Institute of Technology 2013 by Liu Shu.
 
-The producer is specified as a gunsmith who has the item locks, stocks and barrels who costs 45, 30, 25 respectivly. The gunsmith has multiple salespersons who sells his items in different towns in his area. The salespersons gets their salary based on the sum of sold items during a month.
+The producer is specified as a gunsmith who has the item locks, stocks and barrels who costs $45, $30, $25 respectivly. The gunsmith has multiple salespersons who sells his items in different towns in his area. The salespersons gets their salary based on the sum of sold items during a month.
 
 ### How to use Commission
 
@@ -24,8 +24,9 @@ The producer is specified as a gunsmith who has the item locks, stocks and barre
 	* To view a specified month, select a month in the calendar field and press 'Filter month'
 		* When a month is filtered you can report that month to your gunsmith by pressing 'Send Report'
 			* The report is then send to the gunsmith for confirmation of the sales and calculation of your commission
-			* Note that no sales can not be added to a month ones a report is sent
-			* A month with no sales can not be reported
+			* Note:
+			1) After reporting a month you will not be able to add more sales to that month.
+			2) To be able to report a month the salesperson must have sold at least 1 lock, 1 stock and 1 barrel during that month.
 		* To remove the filter, press 'Show All'
 * In the 'Salary' tab you can view your confirmed (with salary) and unconfirmed reports
 * Log out by pressing the 'Log out' button
