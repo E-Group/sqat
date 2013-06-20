@@ -17,7 +17,8 @@ The producer is specified as a gunsmith who has the item locks, stocks and barre
 #### As a salesperson:
 * Log in with your username and password
 * In the 'Add sale' tab you can enter a sale
-	* A sale can consist of at least one item and max 70 locks, 80 stocks and 90 barrels.
+	* A sale can consist of at least one item.
+		* A salesperson can sell a maximum of 70 locks, 80 stocks and 90 barrels each month.
 	* Change date of the sale by pressing the calendar icon
 	* Submit your sale by pressing the 'Add sale' button
 * In the 'Sales' tab you can see the history of all sales made by you
@@ -36,7 +37,9 @@ The producer is specified as a gunsmith who has the item locks, stocks and barre
 * In the 'Sales' tab you can show all sales your salespersons has made.
 	* You can also filter by salesperson with the dropdown list and 'Filter' button
 * In the 'Commission' tab you can see all unconfirmed reports send by your salespersons
-	* Each unconfirmed report has a caluculated commission value based on the sum of sales during that month
+	* Each unconfirmed report has a caluculated commission value based on the sum of sales during that month:
+		* A lock cost 45, a stock cost 30 and a barrel cost 25.
+		* The commission if calculated as follows: 10% on sales up to (and including) $1000, 15% on the next $800, and 20% on any sales in excess of $1800.
 	* To confirm a report press 'Confirm'
 * Log out by pressing the 'Log out' button
 
@@ -69,35 +72,6 @@ The setup guide below is to be executed in a Windows enviroment.
 
 To start the program, simply enter "http://localhost:8080/Commission/" in your browser.
 
-### Dependencies
-
-/*
-Stocksify uses the Yahoo! Query Language (YQL) to query for stock information and is totally dependent of Yahoo's web service and the YQL to provide information. The application is also dependent on the fact that the user has an Internet connection in order to be able to connect to Yahoo's web services.
-*/
-
-### Limitations
-
-
-/*
-Stocksify can only get information on stocks from the whole world if using the short symbols provided by finance.yahoo.com.
-
-Yahoo supplies the following information on the YQL service. These are the highest level constraints for the Product:
-
-	x YQL has a performance uptime target of over 99.5%.
-
-	x YQL relies on the correct operation of the Web services and content providers it accesses.
-
-	x YQL rate limits are subject to the rate limits of other Yahoo! and 3rd-party Web services, and all rates are subject to change.
-*/
-
-## Licensing
-
-
-/*
-Stocksify is free to use, change and distribute. Note however that there may be license restrictions in the libraries used within the product. For further information, please refer to the License Agreement of Google Guava (https://code.google.com/p/guava-libraries/, Apache License 2.0), JSON (http://www.json.org/license.html) and/or Apache HttpComponents (http://www.apache.org/licenses/, Apache License 2.0).
-*/
-
-
 ## Disclaimer
 
 The developers takes no responsibility or liability in the possible case of damage or loss of property from using this application.
@@ -105,9 +79,3 @@ The developers takes no responsibility or liability in the possible case of dama
 ## Authors
 
 David Buö and Niklas Lavrell
-
-Hand-ins
----------------
-System introduction
-Installation guide
-Report on other sytem, evaluate the two above
