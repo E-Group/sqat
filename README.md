@@ -1,21 +1,20 @@
-Commission
-==========
+# Commission
 
-# System introcution
+## System introcution
 
-## What it is?
+### What it is?
 
 Commission is a browser/server application that provides a system that manage producers, who provides items, and salespersons, who sells the items. One producer has many salespersons that sells only his items. The salespersons enter his sales into the system and send a report of a month when all sales for that month is entered. The producer can then confirm the report from the salesperson and approve his calculated commission for the month. Both user types can view their history of data related to themselves.
 
-## Context
+### Context
 
 This program is developed as a lab in the Software Testing and Quality Assurance course given at Harbin Institute of Technology 2013 by Liu Shu.
 
 The producer is specified as a gunsmith who has the item locks, stocks and barrels who costs 45, 30, 25 respectivly. The gunsmith has multiple salespersons who sells his items in different towns in his area. The salespersons gets their salary based on the sum of sold items during a month.
 
-## How to use Commission
+### How to use Commission
 
-### As a salesperson:
+#### As a salesperson:
 * Log in with your username and password
 * In the 'Add sale' tab you can enter a sale
 	* A sale can consist of at least one item and max 70 locks, 80 stocks and 90 barrels.
@@ -31,7 +30,7 @@ The producer is specified as a gunsmith who has the item locks, stocks and barre
 * In the 'Salary' tab you can view your confirmed (with salary) and unconfirmed reports
 * Log out by pressing the 'Log out' button
 
-### As a gunsmith:
+#### As a gunsmith:
 * Log in with your username and password
 * In the 'Sales' tab you can show all sales your salespersons has made.
 	* You can also filter by salesperson with the dropdown list and 'Filter' button
@@ -40,9 +39,9 @@ The producer is specified as a gunsmith who has the item locks, stocks and barre
 	* To confirm a report press 'Confirm'
 * Log out by pressing the 'Log out' button
 
-# Installation guide
+## Installation guide
 
-### The program requires:
+#### The program requires:
 	- At least Java 1.7
 	- At least Apache Tomcat 7.0
 	- At least MySQL 5.5.20
@@ -50,17 +49,17 @@ The program is developed with the specified version numbers of services, lower v
 
 The setup guide below is to be executed in a Windows enviroment.
 
-### Java setup:
+#### Java setup:
 	- Download and install Java from http://java.com/
 
-### Apache Tomcat setup:
+#### Apache Tomcat setup:
 	- Download Apache Tomcat at http://tomcat.apache.org/
 	- Unpack the package at a location of your choice
 	- Move the Commission.war file into the folder "<tomcat location>/webapps/"
 	- Start the Tomcat server by running "<tomcat location>/bin/startup.bat"
 	- Tomcat commands can be found at ?
 
-### MySQL setup:
+#### MySQL setup:
 	- Download and install MySQL form http://www.mysql.com/
 	- Create a new database
 	- Run the attached commission.sql file in the database
@@ -69,13 +68,13 @@ The setup guide below is to be executed in a Windows enviroment.
 
 To start the program, simply enter "http://localhost:8080/Commission/" in your browser.
 
-## Dependencies
+### Dependencies
 
 /*
 Stocksify uses the Yahoo! Query Language (YQL) to query for stock information and is totally dependent of Yahoo's web service and the YQL to provide information. The application is also dependent on the fact that the user has an Internet connection in order to be able to connect to Yahoo's web services.
 */
 
-## Limitations
+### Limitations
 
 
 /*
@@ -104,8 +103,7 @@ The developers takes no responsibility or liability in the possible case of dama
 
 ## Authors
 
-David Buö
-Niklas Lavrell
+David Buö and Niklas Lavrell
 
 Hand-ins
 ---------------
