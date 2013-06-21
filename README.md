@@ -65,8 +65,8 @@ The setup guide below is to be executed in a Windows enviroment.
 
 #### MySQL setup:
 	- Download and install MySQL form http://www.mysql.com/
-	- Create a new database
-	- Run the attached commission.sql file in the database
+	- Create a new database named 'sqaat'
+	- Run the attached sqaat.sql file in the database
 	- Make sure the database settings are the same as the settings in "<tomcat location>/webapps/Commission/WEB-INF/classes/config.properties". If you want to change the settings in the file, you need to restart the Tomcat server for the changes to take place. Also make sure that the database user has the right privilegies in the database.
 	- Default users are found in the table 'user', these can be modified manually via MySQL
 
