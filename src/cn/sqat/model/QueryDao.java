@@ -235,8 +235,7 @@ public class QueryDao {
 
 	public static ReportBean submitReport(ReportBean report) {
 		if(report.getMonth().equals("-01")){
-			report.setError("Please select a month.");
-			return report;
+			throw new IllegalStateException("Please select a Month.");
 		}
 
 		Statement stmt = null;
