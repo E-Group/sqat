@@ -27,7 +27,6 @@ public class LoginDao{
 
 			if (!userExists)
 			{
-				System.out.println("Username/Password entered is Incorrect or User doesnot Exists.");
 				bean.setValid(false);
 			}
 			else if (userExists)
@@ -46,18 +45,6 @@ public class LoginDao{
 					bean.setGunner(true);
 					bean.setGunsmith("NAN");
 				}
-					
-				
-//				stmt = currentCon.createStatement();
-//				rs = stmt.executeQuery("select * from gunsmith where id ="+bean.getId()+";");
-//				if (!rs.next() ) {
-//				    System.out.println("Salesperson");
-//				    /* Salesperson */
-//				    bean.setGunner(false);
-//				}
-//				else
-//					bean.setGunner(true);
-				
 			}
 		}
 		catch (Exception ex)

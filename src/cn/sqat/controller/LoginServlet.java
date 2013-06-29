@@ -61,8 +61,6 @@ public class LoginServlet extends HttpServlet {
 				session.setAttribute("user", user.getUsername());
 				session.setAttribute("id", user.getId());
 				session.setAttribute("loginbean", user);
-				System.out.println("Username:"+user.getUsername());
-				System.out.println("isGunner:"+user.isGunner());
 
 				if(user.isGunner()){
 					initGunner(request, user);

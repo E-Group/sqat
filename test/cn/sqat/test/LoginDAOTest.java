@@ -3,63 +3,50 @@ package cn.sqat.test;
 import static org.junit.Assert.*;
 
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import cn.sqat.model.LoginBean;
 import cn.sqat.model.LoginDao;
 
+/**
+ * Test class for testing the LoginDAO where the user input is checked
+ * against the DB and authorized or not.
+ * @author David Buö
+ *
+ */
 public class LoginDAOTest {
-	public static LoginBean lb;
+	public static LoginBean loggedInUser;
 	
+	/**
+	 * This method will run before the test case and
+	 * initiate the loginBean with the user credentials.
+	 */
 	@BeforeClass
 	public static void testSetup() {
-	}
-
-	@Test
-	public void testCorrectUserInformation() {
-		lb = new LoginBean();
-		lb.setUserName("david");
-		lb.setPassword("david");
-		
-		LoginDao ld = new LoginDao();
-		LoginBean lbFromDb = ld.login(lb);
-		
-		assertTrue("Username/Password incorrect", lbFromDb.isValid());
+		loggedInUser = new LoginBean();
+		loggedInUser.setUserName("zup3rSt4r");
+		loggedInUser.setPassword("david");
 	}
 	
-	@Test
-	public void testWrongUsername() {
-		lb = new LoginBean();
-		lb.setUserName("avid");
-		lb.setPassword("david");
-		
-		LoginDao ld = new LoginDao();
-		LoginBean lbFromDb = ld.login(lb);
-		
-		assertFalse("Username should not be correct",lbFromDb.isValid());
-	}
-
-	@Test
-	public void testWrongPass() {
-		lb = new LoginBean();
-		lb.setUserName("david");
-		lb.setPassword("avid");
-		
-		LoginDao ld = new LoginDao();
-		LoginBean lbFromDb = ld.login(lb);
-		
-		assertFalse("Password should not be correct",lbFromDb.isValid());
+	/**
+	 * This is the actual test method that will test
+	 * that the user is valid in the system since
+	 * it's a correct user.
+	 */
+	@Test(timeout=1000)
+	public void testUserAuthentication() {
+		/* We expect the parameter to be true otherwise the test will fail */
+		assertTrue("Username/Password incorrect", LoginDao.login(loggedInUser).isValid());
 	}
 	
-	@Test
-	public void testWrong() {
-		lb = new LoginBean();
-		lb.setUserName("avid");
-		lb.setPassword("avid");
-		
-		LoginDao ld = new LoginDao();
-		LoginBean lbFromDb = ld.login(lb);
-		
-		assertFalse("Userinformation should not be correct",lbFromDb.isValid());
+	/**
+	 * This method will be ignored, if not we will see a failure in the
+	 * execution of the test class since Hi != Good bye.
+	 */
+	@Ignore
+	public void testToIgnore(){
+		String message = "Good bye";
+		assertEquals("Hi", message);
 	}
 }

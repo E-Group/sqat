@@ -1,6 +1,7 @@
 package cn.sqat.test;
 
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -8,41 +9,47 @@ import org.junit.rules.ExpectedException;
 import cn.sqat.model.QueryDao;
 import cn.sqat.model.ReportBean;
 
+/**
+ * Test class for testing that an IllegalStateException is thrown
+ * when trying to insert an already reported month into the database.
+ * @author David Buö
+ *
+ */
 public class ReportTest {
-	static ReportBean rb;
-	
-	@Rule
-	public ExpectedException exception = ExpectedException.none();
-	
+	public static ReportBean reportBeanToSend;
+
+	/**
+	 * This method will run before the test case and
+	 * initiate the ReportBean with a reported month.
+	 */
 	@BeforeClass
 	public static void testSetup() {
-		rb = new ReportBean();
+		reportBeanToSend = new ReportBean();
+		reportBeanToSend.setId(2);
 	}
-	
+
 	/**
-	 * Test for an "empty" month. The queryDao should throw and
-	 * illegalstateexception and not proceed with the operations.
+	 * Our test method that will expect an IllegalStateException.
+	 * If that exceptions isn't thrown the test will fail.
 	 */
 	@Test(expected = IllegalStateException.class)
-	public void testExceptionIsThrown() {
-		QueryDao tester = new QueryDao();
-		rb = new ReportBean();
-		/* Format of an empty month is "-01" */
-		rb.setMonth("-01");
-		tester.submitReport(rb);
+	public void testException() {
+		/* This month is already reported and should throw and exception. */
+		reportBeanToSend.setMonth("2013-01-01");
+		/* This is the method we expect to throw an IllegalStateException */
+		QueryDao.submitReport(reportBeanToSend);
 	}
-	/**
-	 * Test for and already reported month. We expect a certain message
-	 * with the exception.
-	 */
-	  @Test
-	  public void throwsIllegalArgumentExceptionIfIconIsNull() {
-	    exception.expect(IllegalStateException.class);
-	    exception.expectMessage("A sales report already exist for 2013-01, please" +
-				" select another month.");
-	    QueryDao t = new QueryDao();
-	    rb.setMonth("2013-01-1");
-	    rb.setId(2);
-	    t.submitReport(rb);
-	  }
+
+	@Rule
+	public ExpectedException exception = ExpectedException.none();
+
+	@Ignore//	@Test
+	public void testEmptyMonthExceptionMessage() {
+		exception.expect(IllegalStateException.class);
+		/* The exception message we expect for this kind of exception */
+		exception.expectMessage("Please select a Month.");
+		/* An empty month that will should the message above */
+		reportBeanToSend.setMonth("-01");
+		QueryDao.submitReport(reportBeanToSend);
+	}
 }
