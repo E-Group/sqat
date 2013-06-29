@@ -41,6 +41,8 @@ public class ReportTest {
 	}
 
 	@Rule
+	/* With @Rule you can create objects which can be used and
+	 * configured in your test methods.*/
 	public ExpectedException exception = ExpectedException.none();
 
 	@Ignore//	@Test
