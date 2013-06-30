@@ -210,26 +210,21 @@ public class QueryDao {
 				switch(itemId){
 				case 1: cb.setLocks(cb.getLocks()+rs.getInt("quantity"));
 				cb.setLocksPrice(rs.getInt("price"));
-				System.out.println(cb.getLocks()+" Lock");
 				break;
 				case 2: cb.setStocks(cb.getStocks()+rs.getInt("quantity"));
 				cb.setStocksPrice(rs.getInt("price"));
-				System.out.println(cb.getStocks()+" Stock");
 				break;
 				case 3: cb.setBarrels(cb.getBarrels()+rs.getInt("quantity"));
 				cb.setBarrelsPrice(rs.getInt("price"));
-				System.out.println(cb.getBarrels() +" Barrels");
 				break;
 
 				}
-				System.out.println(cb.getMonth());
 			}
 		}
 		catch (Exception ex)
 		{
 			System.out.println("Query failed: An Exception has occurred! " + ex);
 		}
-		System.out.println("Done with SQL");
 		return dataList;
 	}
 
