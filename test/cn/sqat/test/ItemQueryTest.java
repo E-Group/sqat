@@ -56,7 +56,7 @@ public class ItemQueryTest {
 	 */
 	@Parameters
 	public static Collection<Object[]> data() {
-		/* This is our input parameters, we will test item id: 1,2 and 3.*/
+		/* This is our input parameters, we will test item id: 1, 2 and 3.*/
 		Object[][] data = new Object[][] { { 1 }, { 2 }, { 3 } };
 		return Arrays.asList(data);
 	}

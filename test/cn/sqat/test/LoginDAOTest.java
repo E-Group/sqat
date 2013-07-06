@@ -25,7 +25,7 @@ public class LoginDAOTest {
 	@BeforeClass
 	public static void testSetup() {
 		loggedInUser = new LoginBean();
-		loggedInUser.setUserName("zup3rSt4r");
+		loggedInUser.setUserName("zup3rzt4r");
 		loggedInUser.setPassword("david");
 	}
 	
@@ -34,7 +34,8 @@ public class LoginDAOTest {
 	 * that the user is valid in the system since
 	 * it's a correct user.
 	 */
-	@Test(timeout=1000)
+//	@Test(timeout=1000)
+	@Test
 	public void testUserAuthentication() {
 		/* We expect the parameter to be true otherwise the test will fail */
 		assertTrue("Username/Password incorrect", LoginDao.login(loggedInUser).isValid());

@@ -33,6 +33,7 @@ public class ReportTest {
 	 * If that exceptions isn't thrown the test will fail.
 	 */
 	@Test(expected = IllegalStateException.class)
+	//	@Ignore
 	public void testException() {
 		/* This month is already reported and should throw and exception. */
 		reportBeanToSend.setMonth("2013-01-01");
@@ -45,7 +46,8 @@ public class ReportTest {
 	 * configured in your test methods.*/
 	public ExpectedException exception = ExpectedException.none();
 
-	@Ignore//	@Test
+	@Ignore
+	//	@Test	
 	public void testEmptyMonthExceptionMessage() {
 		exception.expect(IllegalStateException.class);
 		/* The exception message we expect for this kind of exception */
